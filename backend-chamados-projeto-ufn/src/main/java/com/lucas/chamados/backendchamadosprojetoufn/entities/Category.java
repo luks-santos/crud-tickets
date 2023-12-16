@@ -1,11 +1,18 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Category {
 
@@ -15,6 +22,7 @@ public class Category {
 
     private String name;
 
-    //@OneToMany(mappedBy = "category")
-    //private List<Topic> topics = new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Topic> topics = new ArrayList<>();
 }

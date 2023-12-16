@@ -46,8 +46,6 @@ export class TopicsComponent {
 			);
 	}
 
-
-
 	private openDialog(topic: Topic, isNew: boolean): void {
 		this.categoriesService.findAll()
 			.pipe(
