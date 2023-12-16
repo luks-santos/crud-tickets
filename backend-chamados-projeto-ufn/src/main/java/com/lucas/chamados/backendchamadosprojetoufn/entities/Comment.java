@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-public class Topic {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,9 +19,6 @@ public class Topic {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Category category;
-
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "comment")
     private List<Ticket> tickets = new ArrayList<>();
 }

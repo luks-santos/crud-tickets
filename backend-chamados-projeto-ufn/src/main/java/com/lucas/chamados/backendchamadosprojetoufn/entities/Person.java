@@ -7,11 +7,10 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 @Getter
 @Setter
 @Entity
-public class Topic {
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,9 +18,10 @@ public class Topic {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Category category;
+    private String email;
 
-    @OneToMany(mappedBy = "topic")
+    private String cellphone;
+
+    @OneToMany(mappedBy = "person")
     private List<Ticket> tickets = new ArrayList<>();
 }
