@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { CategoriesComponent } from './containers/categories/categories.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { CommentsComponent } from './containers/comments/comments.component';
+import { TopicListComponent } from './components/topic-list/topic-list.component';
+import { TopicsComponent } from './containers/topics/topics.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { CommentsComponent } from './containers/comments/comments.component';
     CategoriesComponent,
     CategoryListComponent,
     CommentListComponent,
-    CommentsComponent
+    CommentsComponent,
+    TopicListComponent,
+    TopicsComponent
   ],
   imports: [
     CommonModule,

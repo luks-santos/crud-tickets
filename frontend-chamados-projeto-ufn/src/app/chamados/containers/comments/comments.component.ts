@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError, Observable, of } from 'rxjs';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
+import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
 
 import { Comment } from '../../model/comment';
 import { CommentService } from '../../service/comments.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
-import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
 	selector: 'app-comments',
@@ -26,7 +26,7 @@ export class CommentsComponent {
 		this.refresh();
 	}
 
-	onError(errorMsg: String) {
+	onError(errorMsg: string) {
 		this.dialog.open(ErrorDialogComponent, {
 			data: errorMsg
 		});
@@ -47,12 +47,13 @@ export class CommentsComponent {
 			data: {
 				ref: 'Categorias',
 				name: comment.name,
+				options: []
 			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				comment.name = result;
+				comment.name = result.name;
 
 				if (isNew) {
 					this.commentService.create(comment).subscribe(() => this.refresh());

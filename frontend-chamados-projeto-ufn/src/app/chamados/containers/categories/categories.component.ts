@@ -26,7 +26,7 @@ export class CategoriesComponent {
 		this.refresh();
 	}
 
-	onError(errorMsg: String) {
+	onError(errorMsg: string) {
 		this.dialog.open(ErrorDialogComponent, {
 			data: errorMsg
 		});
@@ -47,12 +47,13 @@ export class CategoriesComponent {
 			data: {
 				ref: 'Categorias',
 				name: category.name,
+				options: []
 			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result) {
-				category.name = result;
+			if (result) {			
+				category.name = result.name;
 
 				if (isNew) {
 					this.categoriesService.create(category).subscribe(() => this.refresh());

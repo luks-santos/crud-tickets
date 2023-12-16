@@ -15,8 +15,6 @@ export class CommentListComponent {
 
   readonly displayedColumns = ['name', 'actions'];
 
-  constructor() {}
-
   onAdd() {
     this.add.emit();
   }

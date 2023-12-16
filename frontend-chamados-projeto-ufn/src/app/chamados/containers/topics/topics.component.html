@@ -3,12 +3,12 @@
 
         <div>
 
-            <app-comment-list *ngIf="comments$ | async as comments;" 
-                                [comments]="comments"
+            <app-topic-list *ngIf="topics$ | async as topics;" 
+                                [topics]="topics"
                                 (add)="onAdd()"
                                 (edit)="onEdit($event)"
                                 (delete)="onDelete($event)"
-            ></app-comment-list>
+            ></app-topic-list>
 
         </div>
     </mat-card-content>
