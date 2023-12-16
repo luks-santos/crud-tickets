@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-content>
+
+        <div>
+
+            <app-category-list *ngIf="categories$ | async as categories;" 
+                                [categories]="categories"
+                                (add)="onAdd()"
+                                (edit)="onEdit($event)"
+                                (delete)="onDelete($event)"
+            ></app-category-list>
+
+        </div>
+    </mat-card-content>
+</mat-card>
