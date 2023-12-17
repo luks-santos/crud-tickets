@@ -1,4 +1,4 @@
-package com.lucas.chamados.backendchamadosprojetoufn.controller.jwt;
+package com.lucas.chamados.backendchamadosprojetoufn.jwt.security;
 
 import com.lucas.chamados.backendchamadosprojetoufn.dto.jwt.AuthenticationDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.jwt.LoginResponseDTO;

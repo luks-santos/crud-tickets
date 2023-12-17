@@ -1,5 +1,6 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +21,6 @@ public class Comment {
     private String name;
 
     @OneToMany(mappedBy = "comment")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Ticket> tickets = new ArrayList<>();
 }

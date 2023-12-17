@@ -23,7 +23,6 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(user.getLogin())
-                    .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new JWTCreationException("Error while generating token", e);
@@ -41,9 +40,5 @@ public class TokenService {
         } catch (JWTVerificationException e) {
             return "";
         }
-    }
-
-    private Instant genExpirationDate() {
-        return LocalDateTime.now().plusHours(10).toInstant(ZoneOffset.of("-03:00"));
     }
 }
