@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Comment } from 'src/app/chamados/model/comment';
+import { Comment } from 'src/app/model/comment';
 
 @Component({
   selector: 'app-comment-list',

@@ -4,12 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from './containers/categories/categories.component';
 import { CommentsComponent } from './containers/comments/comments.component';
 import { TopicsComponent } from './containers/topics/topics.component';
+import { authGuard } from '../guards/auth.guard';
 
 
 const routes: Routes = [
-  { path: 'categories', component: CategoriesComponent },
-  { path: 'comments', component: CommentsComponent },
-  { path: 'topics', component: TopicsComponent },
+  {
+    path: '',
+    canActivateChild: [authGuard],
+    children: [
+      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorias' } },
+      { path: 'comments', component: CommentsComponent, data: { title: 'Comentários' } },
+      { path: 'topics', component: TopicsComponent, data: { title: 'Tópicos' } },
+    ],
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

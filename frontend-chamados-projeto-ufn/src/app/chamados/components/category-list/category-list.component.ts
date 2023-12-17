@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Category } from 'src/app/chamados/model/category';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-category-list',

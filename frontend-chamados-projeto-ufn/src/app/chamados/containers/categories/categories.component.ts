@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
-import { Category } from '../../model/category';
+import { Category } from '../../../model/category';
 import { CategoriesService } from '../../service/categories.service';
 import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';

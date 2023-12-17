@@ -6,7 +6,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
 
-import { Comment } from '../../model/comment';
+import { Comment } from '../../../model/comment';
 import { CommentService } from '../../service/comments.service';
 
 @Component({

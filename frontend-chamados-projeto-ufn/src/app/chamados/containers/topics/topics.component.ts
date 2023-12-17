@@ -5,8 +5,8 @@ import { catchError, Observable, of, switchMap } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
 
-import { Category } from '../../model/category';
-import { Topic } from '../../model/topic';
+import { Category } from '../../../model/category';
+import { Topic } from '../../../model/topic';
 import { CategoriesService } from '../../service/categories.service';
 import { TopicService } from '../../service/topic.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';

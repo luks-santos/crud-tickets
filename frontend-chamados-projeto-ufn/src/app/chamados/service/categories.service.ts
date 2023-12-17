@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category } from '../model/category';
+import { Category } from '../../model/category';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { Observable } from 'rxjs';
 export class CategoriesService {
 
   	private readonly API = 'api/categories';
-
+	private tokenName = environment.TOKEN_NAME;
+	
   	constructor(private httpClient: HttpClient) { }
 
   	findAll(): Observable<Category[]> {
