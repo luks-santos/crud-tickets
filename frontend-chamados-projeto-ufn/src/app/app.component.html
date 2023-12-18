@@ -1,32 +1,32 @@
 <mat-sidenav-container>
 
-    <mat-sidenav #sidenav mode="side">
-      <mat-nav-list>
-        <a mat-list-item routerLink="/chamados/categories">Categorias</a>
-        <a mat-list-item routerLink="/chamados/comments">Comentários</a>
-        <a mat-list-item routerLink="/chamados/topics">Tópicos</a>
-      </mat-nav-list>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-  
-        <span>App Chamados - {{ title }}</span>
-  
-        <span class="example-spacer"></span>
-  
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>favorite</mat-icon>
-        </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-          <mat-icon>share</mat-icon>
-        </button>
-      </mat-toolbar>
+  <mat-sidenav #sidenav mode="side" opened class="custom-sidenav text-white">
+    <div class="custom-sidenav-title">App Chamados</div>
+    <mat-nav-list>
+      <a matListItemLine routerLink="/chamados/categories" class="text-white ml-2" [class.active]="isActive('/chamados/categories')">Categorias</a>
+      <a matListItemLine routerLink="/chamados/comments" class="text-white ml-2" [class.active]="isActive('/chamados/comments')">Comentários</a>
+      <a matListItemLine routerLink="/chamados/topics" class="text-white ml-2" [class.active]="isActive('/chamados/topics')">Tópicos</a>
+    </mat-nav-list>
+  </mat-sidenav>
 
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span>{{ title }}</span>
+
+      <span class="example-spacer"></span>
+
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
