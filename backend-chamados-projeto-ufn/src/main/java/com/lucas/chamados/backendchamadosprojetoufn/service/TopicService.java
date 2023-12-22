@@ -1,6 +1,6 @@
 package com.lucas.chamados.backendchamadosprojetoufn.service;
 
-import com.lucas.chamados.backendchamadosprojetoufn.dto.topic.TopicDTO;
+import com.lucas.chamados.backendchamadosprojetoufn.dto.TopicDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Category;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Topic;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.CategoryRepository;

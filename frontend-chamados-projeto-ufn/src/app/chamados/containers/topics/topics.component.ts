@@ -55,7 +55,7 @@ export class TopicsComponent {
 					
 					const dialogRef = this.dialog.open(InputDialogComponent, {
 						data: {
-							ref: 'Tópicos',
+							ref: 'Assunto',
 							name: topic.name,
 							selectedOption: topic.categoryId,
 							options: this.categories,

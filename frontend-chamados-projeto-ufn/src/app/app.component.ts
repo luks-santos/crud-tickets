@@ -10,6 +10,8 @@ import { filter } from 'rxjs';
 export class AppComponent implements OnInit {
 	title = 'App Chamados';
 
+	mostrarNavBar: boolean = true;
+
 	constructor(private router: Router) { }
 
 	ngOnInit(): void {

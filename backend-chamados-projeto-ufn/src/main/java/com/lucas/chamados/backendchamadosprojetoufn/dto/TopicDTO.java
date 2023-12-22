@@ -1,4 +1,4 @@
-package com.lucas.chamados.backendchamadosprojetoufn.dto.topic;
+package com.lucas.chamados.backendchamadosprojetoufn.dto;
 
 import java.util.UUID;
 

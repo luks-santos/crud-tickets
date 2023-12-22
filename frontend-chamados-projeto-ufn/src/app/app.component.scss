@@ -15,15 +15,15 @@
 }
 
 mat-nav-list a {
-    padding: 10px; // Adicione algum espaço ao redor dos itens da lista
-    text-decoration: none; // Remova a sublinhado padrão
-    transition: background-color 0.3s ease; // Adicione uma transição para suavizar a mudança de cor
+    padding: 10px; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease; 
   
     &:hover {
-      background-color: #ffffff1a; // Cor de fundo ao passar o mouse
+      background-color: #ffffff1a; 
     }
   
     &.active {
-      background-color: #ffffff3d; // Cor de fundo quando a rota está ativa
+      background-color: #ffffff3d; 
     }
   }

@@ -1,9 +1,9 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
+import com.lucas.chamados.backendchamadosprojetoufn.entities.user.User;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Priority;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Status;
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,7 +27,7 @@ public class Ticket {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    private LocalDateTime closedAt;
+    private LocalDateTime closedAt = null;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Comment comment;
@@ -36,5 +36,5 @@ public class Ticket {
     private Topic topic;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Person person;
+    private User user;
 }

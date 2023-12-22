@@ -10,6 +10,7 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import { CommentsComponent } from './containers/comments/comments.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
 import { TopicsComponent } from './containers/topics/topics.component';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TopicsComponent } from './containers/topics/topics.component';
     CommentListComponent,
     CommentsComponent,
     TopicListComponent,
-    TopicsComponent
+    TopicsComponent,
+    TicketListComponent
   ],
   imports: [
     CommonModule,

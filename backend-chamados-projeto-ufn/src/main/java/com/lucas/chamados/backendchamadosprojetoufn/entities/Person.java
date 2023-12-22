@@ -1,5 +1,6 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
+import com.lucas.chamados.backendchamadosprojetoufn.entities.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,6 @@ public class Person {
 
     private String cellphone;
 
-    @OneToMany(mappedBy = "person")
-    private List<Ticket> tickets = new ArrayList<>();
+    @OneToOne(mappedBy = "person")
+    private User user;
 }

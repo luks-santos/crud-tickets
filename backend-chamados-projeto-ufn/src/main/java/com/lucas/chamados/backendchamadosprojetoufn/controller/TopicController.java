@@ -1,7 +1,7 @@
 package com.lucas.chamados.backendchamadosprojetoufn.controller;
 
 
-import com.lucas.chamados.backendchamadosprojetoufn.dto.topic.TopicDTO;
+import com.lucas.chamados.backendchamadosprojetoufn.dto.TopicDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Topic;
 import com.lucas.chamados.backendchamadosprojetoufn.service.TopicService;
 import org.springframework.http.HttpStatus;
