@@ -1,4 +1,4 @@
-package com.lucas.chamados.backendchamadosprojetoufn.enuns.jwt;
+package com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns;
 
 public enum UserRole {
     ADMIN("admin"),

@@ -1,22 +1,20 @@
-package com.lucas.chamados.backendchamadosprojetoufn.service.jwt;
+package com.lucas.chamados.backendchamadosprojetoufn.jwt.security;
 
-import com.lucas.chamados.backendchamadosprojetoufn.repositories.UserRepository;
+import com.lucas.chamados.backendchamadosprojetoufn.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class AuthorizationService implements UserDetailsService {
 
-    private final UserRepository userRepository;
-
-    public AuthorizationService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByLogin(username);
+        return userService.findByLogin(username);
     }
 }

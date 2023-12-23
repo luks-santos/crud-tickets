@@ -1,6 +1,5 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
-import com.lucas.chamados.backendchamadosprojetoufn.entities.user.User;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Priority;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Status;
 import jakarta.persistence.*;

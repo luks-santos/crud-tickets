@@ -3,7 +3,6 @@ package com.lucas.chamados.backendchamadosprojetoufn.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,11 +17,6 @@ import java.util.UUID;
 @Entity
 public class Topic {
 
-    public Topic(UUID id, String name, Category category) {
-        this.name = name;
-        this.category = category;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -36,4 +30,10 @@ public class Topic {
     @OneToMany(mappedBy = "topic")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Ticket> tickets = new ArrayList<>();
+
+    public Topic(UUID id, String name, Category category) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+    }
 }

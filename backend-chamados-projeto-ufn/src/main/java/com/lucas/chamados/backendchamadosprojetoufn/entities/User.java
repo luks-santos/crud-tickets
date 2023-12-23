@@ -1,31 +1,29 @@
-package com.lucas.chamados.backendchamadosprojetoufn.entities.user;
+package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
-import com.lucas.chamados.backendchamadosprojetoufn.entities.Person;
-import com.lucas.chamados.backendchamadosprojetoufn.entities.Ticket;
-import com.lucas.chamados.backendchamadosprojetoufn.enuns.jwt.UserRole;
+import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "users")
 @Entity(name = "users")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String login;
 
@@ -49,9 +47,9 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+            return List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("USER"));
         } else {
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+            return List.of(new SimpleGrantedAuthority("USER"));
         }
     }
 
