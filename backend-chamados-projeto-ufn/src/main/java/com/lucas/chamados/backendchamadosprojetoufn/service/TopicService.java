@@ -5,6 +5,8 @@ import com.lucas.chamados.backendchamadosprojetoufn.dto.mapper.TopicMapper;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Topic;
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.TopicRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +30,11 @@ public class TopicService {
 
     }
 
-    public TopicDTO save(TopicDTO topicDTO) {
+    public TopicDTO save(@Valid @NotNull TopicDTO topicDTO) {
         return mapper.toDTO(this.repository.save(mapper.toEntity(topicDTO)));
     }
 
-    public TopicDTO update(UUID id, TopicDTO topicDTO) {
+    public TopicDTO update(UUID id, @Valid @NotNull TopicDTO topicDTO) {
         return repository.findById(id)
                 .map(entity -> {
                     updateTopic(entity, mapper.toEntity(topicDTO));

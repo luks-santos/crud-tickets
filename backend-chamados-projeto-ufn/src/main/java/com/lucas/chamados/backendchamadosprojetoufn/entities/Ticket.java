@@ -2,7 +2,10 @@ package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Priority;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Status;
+import com.lucas.chamados.backendchamadosprojetoufn.enuns.converters.PriorityConverter;
+import com.lucas.chamados.backendchamadosprojetoufn.enuns.converters.StatusConverter;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,8 +22,12 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotNull
+    @Convert(converter = StatusConverter.class)
     private Status status;
 
+    @NotNull
+    @Convert(converter = PriorityConverter.class)
     private Priority priority;
 
     @CreationTimestamp
@@ -28,12 +35,12 @@ public class Ticket {
 
     private LocalDateTime closedAt = null;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Comment comment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Topic topic;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 }

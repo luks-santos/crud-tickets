@@ -2,6 +2,8 @@ package com.lucas.chamados.backendchamadosprojetoufn.service;
 
 import com.lucas.chamados.backendchamadosprojetoufn.entities.User;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.UserRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,7 @@ public class UserService {
 
     private final UserRepository repository;
 
-    public User save(User user) {
+    public User save(@Valid @NotNull User user) {
         return repository.save(user);
     }
 

@@ -1,8 +1,12 @@
 package com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns;
 
+import lombok.Getter;
+
+@Getter
 public enum UserRole {
-    ADMIN("admin"),
-    USER("user");
+
+    ADMIN("Admin"),
+    USER("User");
 
     private final String role;
 
@@ -10,7 +14,4 @@ public enum UserRole {
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
-    }
 }

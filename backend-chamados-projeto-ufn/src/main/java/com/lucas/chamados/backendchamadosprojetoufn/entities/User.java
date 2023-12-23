@@ -1,12 +1,15 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.UserRole;
+import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.converters.UserRoleConverter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,10 +28,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank
+    @NotNull
+    @Length(max = 200)
+    @Column(nullable = false, length = 200)
     private String login;
 
+    @NotBlank
+    @NotNull
     private String password;
 
+    @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
     @OneToMany(mappedBy = "user")

@@ -1,5 +1,8 @@
 package com.lucas.chamados.backendchamadosprojetoufn.enuns;
 
+import lombok.Getter;
+
+@Getter
 public enum Status {
 
     ABERTO("Aberto"),
@@ -11,7 +14,4 @@ public enum Status {
         this.status = status;
     }
 
-    public String getStatus() {
-        return status;
-    }
 }

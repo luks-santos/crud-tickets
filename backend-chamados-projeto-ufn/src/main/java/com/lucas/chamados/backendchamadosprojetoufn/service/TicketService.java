@@ -3,6 +3,8 @@ package com.lucas.chamados.backendchamadosprojetoufn.service;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Ticket;
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.TicketRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class TicketService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public Ticket save(Ticket ticket) {
+    public Ticket save(@Valid @NotNull Ticket ticket) {
         return repository.save(ticket);
     }
 

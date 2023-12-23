@@ -3,6 +3,8 @@ package com.lucas.chamados.backendchamadosprojetoufn.service;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Category;
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.CategoryRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +26,11 @@ public class CategoryService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public Category save(Category category) {
+    public Category save(@Valid @NotNull Category category) {
         return repository.save(category);
     }
 
-    public Category update(UUID id, Category category) {
+    public Category update(UUID id, @Valid @NotNull Category category) {
         return repository.findById(id)
                 .map(record -> {
                     record.setName(category.getName());

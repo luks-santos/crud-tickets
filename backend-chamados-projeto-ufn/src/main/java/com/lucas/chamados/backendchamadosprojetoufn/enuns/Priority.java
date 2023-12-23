@@ -1,18 +1,17 @@
 package com.lucas.chamados.backendchamadosprojetoufn.enuns;
 
+import lombok.Getter;
+
+@Getter
 public enum Priority {
 
     BAIXA("Baixa"),
     MEDIA("Média"),
     ALTA("Alta");
 
-    private final String prioridade;
+    private final String priority;
 
-    Priority(String prioridade) {
-        this.prioridade = prioridade;
-    }
-
-    public String getPrioridade() {
-        return prioridade;
+    Priority(String priority) {
+        this.priority = priority;
     }
 }
