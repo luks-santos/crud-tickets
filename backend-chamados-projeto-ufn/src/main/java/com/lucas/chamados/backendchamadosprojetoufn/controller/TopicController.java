@@ -14,36 +14,36 @@ import java.util.UUID;
 @RequestMapping("/api/topics")
 public class TopicController {
 
-    private final TopicService topicService;
+    private final TopicService service;
 
     public TopicController(TopicService topicService) {
-        this.topicService = topicService;
+        service = topicService;
     }
 
     @GetMapping
     public List<Topic> findAll() {
-        return this.topicService.findAll();
+        return this.service.findAll();
     }
 
     @GetMapping(value = "/{id}")
     public Topic findById(@PathVariable UUID id) {
-        return this.topicService.findById(id);
+        return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public TopicDTO save(@RequestBody TopicDTO topic) {
-        return this.topicService.save(topic);
+        return service.save(topic);
     }
 
     @PutMapping(value = "/{id}")
     public TopicDTO update(@PathVariable UUID id, @RequestBody TopicDTO topic) {
-        return this.topicService.update(id, topic);
+        return service.update(id, topic);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
-        this.topicService.delete(id);
+        service.delete(id);
     }
 }

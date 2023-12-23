@@ -1,111 +1,54 @@
 package com.lucas.chamados.backendchamadosprojetoufn.service;
 
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TopicDTO;
-import com.lucas.chamados.backendchamadosprojetoufn.entities.Category;
+import com.lucas.chamados.backendchamadosprojetoufn.dto.mapper.TopicMapper;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Topic;
-import com.lucas.chamados.backendchamadosprojetoufn.repositories.CategoryRepository;
+import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.TopicRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Service
 public class TopicService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TopicService.class);
-
-    private final TopicRepository topicRepository;
-    private final CategoryRepository categoryRepository;
-
-    public TopicService(TopicRepository topicRepository, CategoryRepository categoryRepository) {
-        this.topicRepository = topicRepository;
-        this.categoryRepository = categoryRepository;
-    }
+    private final TopicRepository repository;
+    private final TopicMapper mapper;
 
     public List<Topic> findAll() {
-        try {
-            return this.topicRepository.findAll();
-        } catch (Exception e) {
-            logger.error("Ocorreu um erro ao buscar todos os tópicos", e);
-            throw e;
-        }
+        return repository.findAll();
     }
 
     public Topic findById(UUID id) {
-        try {
-            return this.topicRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Tópico não encontrado com o ID: " + id));
-        } catch (EntityNotFoundException e) {
-            logger.warn("Tópico não encontrado com o ID: {}", id);
-            throw e;
-        } catch (Exception e) {
-            logger.error("Ocorreu um erro ao buscar o tópico com o ID: {}", id, e);
-            throw e;
-        }
+        return repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id));
+
     }
 
     public TopicDTO save(TopicDTO topicDTO) {
-        try {
-            return toDTO(this.topicRepository.save(toEntity(topicDTO)));
-        } catch (Exception e) {
-            logger.error("Ocorreu um erro ao salvar o tópico", e);
-            throw e;
-        }
+        return mapper.toDTO(this.repository.save(mapper.toEntity(topicDTO)));
     }
 
     public TopicDTO update(UUID id, TopicDTO topicDTO) {
-        try {
-            Topic entity = this.topicRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Tópico não encontrado com o ID: " + id));
-
-            updateTopic(entity, toEntity(topicDTO));
-            return toDTO(this.topicRepository.save(entity));
-        } catch (EntityNotFoundException e) {
-            logger.warn("Tópico não encontrado com o ID: {}", id);
-            throw e;
-        } catch (Exception e) {
-            logger.error("Ocorreu um erro ao atualizar o tópico com o ID: {}", id, e);
-            throw e;
-        }
+        return repository.findById(id)
+                .map(entity -> {
+                    updateTopic(entity, mapper.toEntity(topicDTO));
+                    return mapper.toDTO(this.repository.save(entity));
+                })
+                .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public void delete(UUID id) {
-        try {
-            this.topicRepository.delete(this.topicRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Tópico não encontrado com o ID: " + id)));
-        } catch (EntityNotFoundException e) {
-            logger.warn("Tópico não encontrado com o ID: {}", id);
-            throw e;
-        } catch (Exception e) {
-            logger.error("Ocorreu um erro ao excluir o tópico com o ID: {}", id, e);
-            throw e;
-        }
+        repository.delete(repository.findById(id)
+                    .orElseThrow(() -> new RecordNotFoundException(id))
+        );
     }
 
     private void updateTopic(Topic entity, Topic topic) {
         entity.setName(topic.getName());
         entity.setCategory(topic.getCategory());
-    }
-
-    private Topic toEntity(TopicDTO topicDTO) {
-        try {
-            Category category = this.categoryRepository.findById(topicDTO.categoryId())
-                    .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada com o ID: " + topicDTO.categoryId()));
-            return new Topic(topicDTO.id(), topicDTO.name(), category);
-        } catch (EntityNotFoundException e) {
-            logger.warn("Categoria não encontrada com o ID: {}", topicDTO.categoryId());
-            throw e;
-        } catch (Exception e) {
-            logger.error("Ocorreu um erro ao converter DTO para entidade", e);
-            throw e;
-        }
-    }
-
-    private TopicDTO toDTO(Topic topic) {
-        return new TopicDTO(topic.getId(), topic.getName(), topic.getCategory().getId());
     }
 }
