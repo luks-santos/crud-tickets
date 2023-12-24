@@ -2,6 +2,7 @@ package com.lucas.chamados.backendchamadosprojetoufn.enuns;
 
 import lombok.Getter;
 
+
 @Getter
 public enum Status {
 
@@ -9,9 +10,8 @@ public enum Status {
     EM_ANDAMENTO("Em andamento"),
     FECHADO("Fechado");
 
-    private final String status;
-    Status (String status) {
-        this.status = status;
+    private final String value;
+    Status (String value) {
+        this.value = value;
     }
-
 }

@@ -6,7 +6,9 @@ import com.lucas.chamados.backendchamadosprojetoufn.enuns.converters.PriorityCon
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.converters.StatusConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +17,8 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Ticket {
 
@@ -35,12 +39,12 @@ public class Ticket {
 
     private LocalDateTime closedAt = null;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Comment comment;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Topic topic;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private User user;
 }

@@ -1,6 +1,7 @@
 package com.lucas.chamados.backendchamadosprojetoufn.controller;
 
-import com.lucas.chamados.backendchamadosprojetoufn.entities.Ticket;
+import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketDTO;
+import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketListDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,25 +12,25 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/ticket")
+@RequestMapping("/api/tickets")
 public class TicketController {
 
     private final TicketService service;
 
     @GetMapping
-    public List<Ticket> findAll() {
+    public List<TicketListDTO> findAll() {
         return service.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public Ticket findById(@PathVariable UUID id) {
+    public TicketListDTO findById(@PathVariable UUID id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Ticket save(Ticket ticket) {
-        return service.save(ticket);
+    public TicketListDTO save(@RequestBody TicketDTO ticketDTO) {
+        return service.save(ticketDTO);
     }
 
     @DeleteMapping(value = "/{id}")

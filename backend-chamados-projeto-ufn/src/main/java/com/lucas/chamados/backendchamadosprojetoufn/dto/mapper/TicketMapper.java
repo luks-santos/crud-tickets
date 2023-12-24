@@ -1,0 +1,74 @@
+package com.lucas.chamados.backendchamadosprojetoufn.dto.mapper;
+
+import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketDTO;
+import com.lucas.chamados.backendchamadosprojetoufn.entities.*;
+import com.lucas.chamados.backendchamadosprojetoufn.enuns.Priority;
+import com.lucas.chamados.backendchamadosprojetoufn.enuns.Status;
+import com.lucas.chamados.backendchamadosprojetoufn.service.CommentService;
+import com.lucas.chamados.backendchamadosprojetoufn.service.TopicService;
+import com.lucas.chamados.backendchamadosprojetoufn.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@AllArgsConstructor
+@Component
+public class TicketMapper {
+
+    private final CommentService commentService;
+    private final TopicService topicService;
+    private final UserService userService;
+
+    public TicketDTO toDTO(Ticket ticket) {
+        return new TicketDTO(
+                ticket.getId(),
+                ticket.getStatus().toString(),
+                ticket.getPriority().toString(),
+                ticket.getCreatedAt(),
+                ticket.getClosedAt(),
+                ticket.getComment().getId(),
+                ticket.getTopic().getId(),
+                ticket.getUser().getLogin()
+        );
+    }
+
+    public Ticket toEntity(TicketDTO ticketDTO) {
+        Comment comment = commentService.findById(ticketDTO.commentId());
+        Topic topic = topicService.findById(ticketDTO.topicId());
+        User user = userService.findByLogin(ticketDTO.username());
+
+        return new Ticket(
+                ticketDTO.id(),
+                convertStatusValue(ticketDTO.status()),
+                convertPriorityValue(ticketDTO.priority()),
+                ticketDTO.createdAt(),
+                ticketDTO.closedAt(),
+                comment,
+                topic,
+                user
+        );
+    }
+
+    public Status convertStatusValue(String value) {
+        if (value == null) {
+            return null;
+        }
+        return switch (value) {
+            case "Aberto" -> Status.ABERTO;
+            case "Em andamento" -> Status.EM_ANDAMENTO;
+            case "Fechado" -> Status.FECHADO;
+            default -> throw new IllegalArgumentException("Status inválido: " + value);
+        };
+    }
+    public Priority convertPriorityValue(String value) {
+        if (value == null) {
+            return null;
+        }
+        return switch (value) {
+            case "Baixa" -> Priority.BAIXA;
+            case "Média" -> Priority.MEDIA;
+            case "Alta" -> Priority.ALTA;
+            default -> throw new IllegalArgumentException("Prioridade inválida: " + value);
+        };
+    }
+
+}

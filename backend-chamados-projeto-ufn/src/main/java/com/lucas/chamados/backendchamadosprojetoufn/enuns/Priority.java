@@ -9,9 +9,9 @@ public enum Priority {
     MEDIA("Média"),
     ALTA("Alta");
 
-    private final String priority;
+    private final String value;
 
-    Priority(String priority) {
-        this.priority = priority;
+    Priority(String value) {
+        this.value = value;
     }
 }

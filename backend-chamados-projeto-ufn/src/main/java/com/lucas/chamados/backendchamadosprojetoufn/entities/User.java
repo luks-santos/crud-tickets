@@ -1,5 +1,7 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.UserRole;
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.converters.UserRoleConverter;
 import jakarta.persistence.*;
@@ -42,16 +44,18 @@ public class User implements UserDetails {
     private UserRole role;
 
     @OneToMany(mappedBy = "user")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Ticket> tickets = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
-    public User(String login, String password, UserRole role) {
+    public User(String login, String password, UserRole role, Person person) {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.person = person;
     }
 
     @Override

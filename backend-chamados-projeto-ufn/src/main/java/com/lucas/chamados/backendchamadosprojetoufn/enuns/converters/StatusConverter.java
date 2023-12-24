@@ -11,13 +11,13 @@ public class StatusConverter implements AttributeConverter<Status, String> {
 
     @Override
     public String convertToDatabaseColumn(Status status) {
-        return status.getStatus();
+        return status.getValue();
     }
 
     @Override
-    public Status convertToEntityAttribute(String status) {
+    public Status convertToEntityAttribute(String value) {
         return Stream.of(Status.values())
-                .filter(s -> s.getStatus().equals(status))
+                .filter(s -> s.getValue().equals(value))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

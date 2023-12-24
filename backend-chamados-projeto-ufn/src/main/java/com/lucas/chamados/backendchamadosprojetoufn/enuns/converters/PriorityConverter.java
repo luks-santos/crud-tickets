@@ -11,13 +11,13 @@ public class PriorityConverter implements AttributeConverter<Priority, String> {
 
     @Override
     public String convertToDatabaseColumn(Priority priority) {
-        return priority.getPriority();
+        return priority.getValue();
     }
 
     @Override
-    public Priority convertToEntityAttribute(String priority) {
+    public Priority convertToEntityAttribute(String value) {
         return Stream.of(Priority.values())
-                .filter(p -> p.getPriority().equals(priority))
+                .filter(p -> p.getValue().equals(value))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
