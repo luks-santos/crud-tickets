@@ -1,20 +1,18 @@
-package com.lucas.chamados.backendchamadosprojetoufn.jwt.security;
+package com.lucas.chamados.backendchamadosprojetoufn.jwt.security.controller;
 
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.dtos.AuthenticationDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.dtos.LoginResponseDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.dtos.RegisterDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.User;
+import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.service.AuthenticationService;
+import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.service.TokenService;
 import com.lucas.chamados.backendchamadosprojetoufn.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -24,6 +22,7 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
     private final UserService userService;
+    private final AuthenticationService service;
 
     @PostMapping(value = "/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
@@ -42,13 +41,7 @@ public class AuthenticationController {
         if (userService.findByLogin(data.login()) != null) {
             return ResponseEntity.badRequest().build();
         }
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, data.role());
-
-        userService.save(newUser);
-
+        service.register(data);
         return ResponseEntity.ok().build();
     }
-
 }

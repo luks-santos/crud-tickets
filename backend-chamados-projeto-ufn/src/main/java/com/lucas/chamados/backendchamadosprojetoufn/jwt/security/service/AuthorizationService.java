@@ -1,4 +1,4 @@
-package com.lucas.chamados.backendchamadosprojetoufn.jwt.security;
+package com.lucas.chamados.backendchamadosprojetoufn.jwt.security.service;
 
 import com.lucas.chamados.backendchamadosprojetoufn.service.UserService;
 import lombok.AllArgsConstructor;

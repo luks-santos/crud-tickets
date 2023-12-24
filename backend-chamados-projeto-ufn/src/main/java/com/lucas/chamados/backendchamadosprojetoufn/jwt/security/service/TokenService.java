@@ -1,4 +1,4 @@
-package com.lucas.chamados.backendchamadosprojetoufn.jwt.security;
+package com.lucas.chamados.backendchamadosprojetoufn.jwt.security.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
