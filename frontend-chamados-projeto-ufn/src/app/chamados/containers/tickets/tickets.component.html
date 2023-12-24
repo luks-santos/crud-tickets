@@ -1,0 +1,14 @@
+<mat-card>
+   <mat-card-content>
+       <div>
+
+           <app-ticket-list *ngIf="tickets$ | async as tickets;" 
+                               [tickets]="tickets"
+                               (add)="onAdd()"
+                               (edit)="onEdit($event)"
+                               (delete)="onDelete($event)"
+           ></app-ticket-list>
+
+       </div>
+   </mat-card-content>
+</mat-card>

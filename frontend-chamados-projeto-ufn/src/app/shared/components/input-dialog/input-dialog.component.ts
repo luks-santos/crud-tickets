@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 interface DialogData {
 	ref: string;
+	nameSelect: string;
 	name: string;
 	selectedOption?: string;
 	options?: any[];

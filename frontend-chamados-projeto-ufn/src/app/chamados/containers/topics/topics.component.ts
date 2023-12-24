@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Observable, of, switchMap } from 'rxjs';
+import { Topic } from 'src/app/model/topic/topic';
+import { TopicDTO } from 'src/app/model/topic/topicDTO';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
 
 import { Category } from '../../../model/category';
-import { Topic } from '../../../model/topic';
 import { CategoriesService } from '../../service/categories.service';
 import { TopicService } from '../../service/topic.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
 	selector: 'app-topics',
@@ -46,7 +47,7 @@ export class TopicsComponent {
 			);
 	}
 
-	private openDialog(topic: Topic, isNew: boolean): void {
+	private openDialog(topic: TopicDTO, isNew: boolean): void {
 		this.categoriesService.findAll()
 			.pipe(
 				switchMap(categories => {
@@ -55,7 +56,8 @@ export class TopicsComponent {
 					
 					const dialogRef = this.dialog.open(InputDialogComponent, {
 						data: {
-							ref: 'Assunto',
+							ref: 'Tópicos',
+							nameSelect: 'Categoria',
 							name: topic.name,
 							selectedOption: topic.categoryId,
 							options: this.categories,
@@ -80,7 +82,7 @@ export class TopicsComponent {
 	}
 
 	onAdd() {
-		const newTopic: Topic = {
+		const newTopic: TopicDTO = {
 			id: '',
 			name: '',
 			categoryId: ''
@@ -88,8 +90,8 @@ export class TopicsComponent {
 		this.openDialog(newTopic, true);
 	}
 
-	onEdit(topic: any) { 
-		const newTopic: Topic = {
+	onEdit(topic: Topic) { 
+		const newTopic: TopicDTO = {
 			id: topic.id,
 			name: topic.name,
 			categoryId: topic.category.id

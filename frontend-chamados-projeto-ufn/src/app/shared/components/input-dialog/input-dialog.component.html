@@ -9,7 +9,7 @@
 
 		<div *ngIf="data.options?.length != 0">
 			<mat-form-field class="col-12">
-				<mat-label>Selecione uma categoria</mat-label>
+				<mat-label>Selecione uma {{data.nameSelect}}</mat-label>
 				<mat-select [(ngModel)]="data.selectedOption">
 					<mat-option *ngFor="let option of data.options" [value]="option.id">
 						{{ option.name }}
