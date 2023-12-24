@@ -1,6 +1,5 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.UserRole;
 import com.lucas.chamados.backendchamadosprojetoufn.jwt.security.enuns.converters.UserRoleConverter;

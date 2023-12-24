@@ -1,6 +1,7 @@
 package com.lucas.chamados.backendchamadosprojetoufn.dto.mapper;
 
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketDTO;
+import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketListDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.*;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Priority;
 import com.lucas.chamados.backendchamadosprojetoufn.enuns.Status;
@@ -18,16 +19,17 @@ public class TicketMapper {
     private final TopicService topicService;
     private final UserService userService;
 
-    public TicketDTO toDTO(Ticket ticket) {
-        return new TicketDTO(
+    public TicketListDTO toDTO(Ticket ticket) {
+        return new TicketListDTO(
                 ticket.getId(),
-                ticket.getStatus().toString(),
-                ticket.getPriority().toString(),
+                ticket.getStatus().getValue(),
+                ticket.getPriority().getValue(),
                 ticket.getCreatedAt(),
                 ticket.getClosedAt(),
-                ticket.getComment().getId(),
-                ticket.getTopic().getId(),
-                ticket.getUser().getLogin()
+                ticket.getUser().getLogin(),
+                ticket.getUser().getPerson().getName(),
+                ticket.getComment(),
+                ticket.getTopic()
         );
     }
 

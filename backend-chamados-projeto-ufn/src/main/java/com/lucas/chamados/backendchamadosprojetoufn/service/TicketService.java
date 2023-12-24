@@ -1,7 +1,6 @@
 package com.lucas.chamados.backendchamadosprojetoufn.service;
 
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketDTO;
-import com.lucas.chamados.backendchamadosprojetoufn.dto.mapper.TicketListMapper;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.mapper.TicketMapper;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketListDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
@@ -20,23 +19,22 @@ public class TicketService {
 
     private final TicketRepository repository;
     private final TicketMapper mapper;
-    private final TicketListMapper listMapper;
 
     public List<TicketListDTO> findAll() {
         return repository.findAll()
                 .stream()
-                .map(listMapper::toDTO)
+                .map(mapper::toDTO)
                 .toList();
     }
 
     public TicketListDTO findById(UUID id) {
         return repository.findById(id)
-                .map(listMapper::toDTO)
+                .map(mapper::toDTO)
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public TicketListDTO save(@Valid @NotNull TicketDTO ticketDTO) {
-        return listMapper.toDTO(repository.save(mapper.toEntity(ticketDTO)));
+        return mapper.toDTO(repository.save(mapper.toEntity(ticketDTO)));
     }
 
     public void delete(UUID id) {
