@@ -1,0 +1,48 @@
+<mat-sidenav-container>
+	<mat-sidenav #sidenav mode="side" opened class="custom-sidenav text-white">
+		<div class="custom-sidenav-title">Olá</div>
+		<mat-nav-list>
+			<a matListItemLine routerLink="" class="text-white ml-2" [class.active]="isActive('')">Chamados</a>
+
+			<hr class="m-2 border-white">
+			<span class="ml-2 p-2 font-bold d-inline-flex align-items-center" style="font-size: 1.2em;">Cadastros</span>
+			<hr class="m-2 border-white">
+
+			<ul class="list-unstyled">
+				<li>
+					<a matListItemLine routerLink="/chamados/topics" class="text-white ml-4"
+						[class.active]="isActive('/chamados/topics')">Tópicos</a>
+				</li>
+				<li>
+					<a matListItemLine routerLink="/chamados/categories" class="text-white ml-4"
+						[class.active]="isActive('/chamados/categories')">Categorias</a>
+				</li>
+				<li>
+					<a matListItemLine routerLink="/chamados/comments" class="text-white ml-4"
+						[class.active]="isActive('/chamados/comments')">Comentários</a>
+				</li>
+			</ul>
+		</mat-nav-list>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<mat-toolbar color="primary">
+			<button mat-icon-button (click)="sidenav.toggle()">
+				<mat-icon>menu</mat-icon>
+			</button>
+
+			<span class="m-4">{{ title }}</span>
+
+			<div class="ms-auto">
+				<button mat-icon-button class="btn float-end" aria-label="Logout" (click)="logout()">
+					<mat-icon>logout</mat-icon>
+				</button>
+				
+				<button mat-icon-button class="btn float-end" aria-label="User">
+					<mat-icon>person</mat-icon>
+				</button>
+			</div>
+		</mat-toolbar>
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
+</mat-sidenav-container>

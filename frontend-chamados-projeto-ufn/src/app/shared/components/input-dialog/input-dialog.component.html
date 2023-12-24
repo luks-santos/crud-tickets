@@ -1,23 +1,28 @@
-<h1 mat-dialog-title>Cadastro de {{data.ref}}</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="data.name">
-  </mat-form-field>
+<div style="width: 350px;">
+	<h1 mat-dialog-title>Cadastro de {{data.ref}}</h1>
+	
+	<div mat-dialog-content>
+		<mat-form-field class="col-12">
+			<mat-label>Nome</mat-label>
+			<input matInput [(ngModel)]="data.name">
+		</mat-form-field>
 
-  <div *ngIf="data.options?.length != 0">
-    <mat-form-field>
-      <mat-label>Selecione uma opção</mat-label>
-      <mat-select [(ngModel)]="data.selectedOption">
-        <mat-option *ngFor="let option of data.options" [value]="option.id">
-          {{ option.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  
-</div>
-<div mat-dialog-actions class="ml-4">
-  <button mat-button (click)="close()">Cancel</button>
-  <button mat-button [mat-dialog-close]="{ name: data.name, selectedOption: data.selectedOption }" cdkFocusInitial>Ok</button>
+		<div *ngIf="data.options?.length != 0">
+			<mat-form-field class="col-12">
+				<mat-label>Selecione uma categoria</mat-label>
+				<mat-select [(ngModel)]="data.selectedOption">
+					<mat-option *ngFor="let option of data.options" [value]="option.id">
+						{{ option.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+	<div mat-dialog-actions>
+		<div class="ms-auto p-2">
+			<button mat-button (click)="close()">Cancel</button>
+			<button mat-button color="primary"
+				[mat-dialog-close]="{ name: data.name, selectedOption: data.selectedOption }" cdkFocusInitial>Ok</button>
+		</div>
+	</div>
 </div>

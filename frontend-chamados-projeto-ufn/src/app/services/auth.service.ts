@@ -24,7 +24,7 @@ export class AuthService {
 
 	isAuthenticated() {
 		const token = localStorage.getItem(this.tokenName);
-		if(token) {
+		if (token) {
 			return true;
 		} else {
 			this.router.navigate(['/login'])
@@ -37,14 +37,13 @@ export class AuthService {
 	}
 
 	public getKey(key: string): string | null {
-		const value = this.storage.getItem(key);
-		return value !== null ? value : null;
+		return this.storage.getItem(key);
 	}
-
+	
 	public removeKey(key: string) {
 		this.storage.removeItem(key);
 	}
-
+	
 	public removeAllKeys() {
 		this.storage.clear();
 	}

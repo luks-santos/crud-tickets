@@ -5,12 +5,14 @@ import { CategoriesComponent } from './containers/categories/categories.componen
 import { CommentsComponent } from './containers/comments/comments.component';
 import { TopicsComponent } from './containers/topics/topics.component';
 import { authGuard } from '../guards/auth.guard';
+import { MenuSidenavComponent } from './components/menu-sidenav/menu-sidenav.component';
 
 
 const routes: Routes = [
   {
     path: '',
     canActivateChild: [authGuard],
+    component: MenuSidenavComponent,
     children: [
       { path: 'categories', component: CategoriesComponent, data: { title: 'Categorias' } },
       { path: 'comments', component: CommentsComponent, data: { title: 'Comentários' } },

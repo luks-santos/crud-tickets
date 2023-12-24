@@ -1,28 +1,28 @@
-<mat-card class="col-12 col-md-6 mx-auto mt-5">
-    <mat-card-header class="bg-header text-white text-center py-2">
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-  
-    <mat-card-content class="p-3">
-      <form [formGroup]="form">
-        <div class="mb-3">
-          <label for="login" class="form-label">Usuário</label>
-          <input type="text" class="form-control" id="login" formControlName="login" required>
-          <div *ngIf="form.get('login')?.hasError('required') && form.get('login')?.touched" class="text-danger">
-            O usuário é obrigatório.
-          </div>
-        </div>
-  
-        <div class="mb-3">
-          <label for="password" class="form-label">Senha</label>
-          <input type="password" class="form-control" id="password" formControlName="password" required>
-          <div *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched" class="text-danger">
-            A senha é obrigatória.
-          </div>
-        </div>
-  
-        <button mat-raised-button color="primary" class="btn" (click)="login()">Login</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
-  
+<mat-card class="col-12 col-md-6 mx-auto vertical-center">
+	<mat-card-header class="bg-header text-black">
+		<mat-card-title>Login - Chamados</mat-card-title>
+	</mat-card-header>
+
+	<mat-card-content class="p-3">
+		<form [formGroup]="form">
+			<div class="mb-3">
+				<label for="login" class="form-label">Usuário</label>
+				<input type="text" class="form-control" id="login" formControlName="login" required>
+				<div *ngIf="form.get('login')?.hasError('required') && form.get('login')?.touched" class="text-danger">
+					O usuário é obrigatório.
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="password" class="form-label">Senha</label>
+				<input type="password" class="form-control" id="password" formControlName="password" required>
+				<div *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
+					class="text-danger">
+					A senha é obrigatória.
+				</div>
+			</div>
+			<span class="ml-2" *ngIf="passIncorrect" class="text-danger">Login ou Senha incorreta</span>
+			<button mat-raised-button color="primary" class="btn float-end" (click)="login()">Login</button>
+		</form>
+	</mat-card-content>
+</mat-card>

@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
+	passIncorrect: boolean = false;
+
 	form: FormGroup = new FormGroup({
 		login: new FormControl('', [Validators.required]),
 		password: new FormControl('', [Validators.required])
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
 	) { }
 
 	ngOnInit() {
@@ -38,8 +40,8 @@ export class LoginComponent implements OnInit {
 					this.authService.saveKey(environment.TOKEN_NAME, data.token);
 					this.checkAuthentication();
 				},
-				(error: any) => {
-					console.error('Erro ao fazer login:', error);
+				() => {
+					this.passIncorrect = true;
 				}
 			);
 		}
@@ -47,10 +49,9 @@ export class LoginComponent implements OnInit {
 
 	private checkAuthentication() {
 		const authenticated = this.authService.isAuthenticated();
+		
 		if (authenticated) {
 			this.router.navigate(['chamados/categories']);
-		} else {
-			console.error('Falha na autenticação.');
 		}
 	}
 }

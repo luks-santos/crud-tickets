@@ -1,7 +1,9 @@
 <div mat-dialog-content>
     <p>{{ data }}</p>
 </div>
-<div mat-dialog-actions class="ml-4">
-    <button mat-flat-button color="primary" (click)="onConfirm(true)">Sim</button>
-    <button mat-flat-button color="warn" (click)="onConfirm(false)">Não</button>
+<div mat-dialog-actions>
+    <div class="ms-auto p-2">
+        <button mat-flat-button (click)="onConfirm(false)">Cancelar</button>
+        <button mat-flat-button color="warn" (click)="onConfirm(true)">Sim</button>
+    </div>
 </div>

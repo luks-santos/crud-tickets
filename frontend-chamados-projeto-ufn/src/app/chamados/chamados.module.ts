@@ -11,6 +11,7 @@ import { CommentsComponent } from './containers/comments/comments.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
 import { TopicsComponent } from './containers/topics/topics.component';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
+import { MenuSidenavComponent } from './components/menu-sidenav/menu-sidenav.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
     CommentsComponent,
     TopicListComponent,
     TopicsComponent,
-    TicketListComponent
+    TicketListComponent,
+    MenuSidenavComponent
   ],
   imports: [
     CommonModule,
