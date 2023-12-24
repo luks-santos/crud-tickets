@@ -30,7 +30,7 @@ public class Topic {
     @Column(nullable = false, length = 200)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JsonIgnoreProperties("topics")
     private Category category;
 
