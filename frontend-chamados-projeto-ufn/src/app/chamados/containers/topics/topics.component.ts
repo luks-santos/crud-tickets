@@ -56,9 +56,9 @@ export class TopicsComponent {
 					
 					const dialogRef = this.dialog.open(InputDialogComponent, {
 						data: {
-							ref: 'Tópicos',
-							nameSelect: 'Categoria',
-							name: topic.name,
+							title: 'Tópicos',
+							inputName: topic.name,
+							selectTitle: 'Categoria',
 							selectedOption: topic.categoryId,
 							options: this.categories,
 						},
@@ -69,8 +69,8 @@ export class TopicsComponent {
 			)
 			.subscribe(result => {
 				if (result) {
-					topic.name = result.name;
-					topic.categoryId = result.selectedOption;
+					topic.name = result.data.inputName;
+					topic.categoryId = result.data.selectedOption;
 					
 					if (isNew) {
 						this.topicService.create(topic).subscribe(() => this.refresh());

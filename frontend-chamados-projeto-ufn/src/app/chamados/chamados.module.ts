@@ -13,6 +13,7 @@ import { CategoriesComponent } from './containers/categories/categories.componen
 import { CommentsComponent } from './containers/comments/comments.component';
 import { TicketsComponent } from './containers/tickets/tickets.component';
 import { TopicsComponent } from './containers/topics/topics.component';
+import { TicketDialogComponent } from './components/ticket-dialog/ticket-dialog.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TopicsComponent } from './containers/topics/topics.component';
     TopicsComponent,
     TicketListComponent,
     MenuSidenavComponent,
-    TicketsComponent
+    TicketsComponent,
+    TicketDialogComponent
   ],
   imports: [
     CommonModule,

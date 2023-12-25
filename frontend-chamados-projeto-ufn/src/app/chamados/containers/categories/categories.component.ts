@@ -45,15 +45,14 @@ export class CategoriesComponent {
 	private openDialog(category: Category, isNew: boolean): void {
 		const dialogRef = this.dialog.open(InputDialogComponent, {
 			data: {
-				ref: 'Categorias',
-				name: category.name,
-				options: []
+				title: 'Categoria',
+				inputName: category.name,
 			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result) {			
-				category.name = result.name;
+			if (result) {	
+				category.name = result.data.inputName;
 
 				if (isNew) {
 					this.categoriesService.create(category).subscribe(() => this.refresh());

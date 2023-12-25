@@ -45,15 +45,14 @@ export class CommentsComponent {
 	private openDialog(comment: Comment, isNew: boolean): void {
 		const dialogRef = this.dialog.open(InputDialogComponent, {
 			data: {
-				ref: 'Categorias',
+				title: 'Comentário',
 				name: comment.name,
-				options: []
 			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				comment.name = result.name;
+				comment.name = result.data.inputName;
 
 				if (isNew) {
 					this.commentService.create(comment).subscribe(() => this.refresh());
