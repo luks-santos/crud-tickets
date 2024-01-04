@@ -18,6 +18,10 @@ export class TicketsService {
     return this.httpClient.get<Ticket[]>(this.API);
   }
 
+  findByUser() {
+    return this.httpClient.get<Ticket[]>(`${this.API}/user`);
+  }
+  
   save(ticketDTO: TicketDTO): Observable<TicketDTO> {
     return this.httpClient.post<TicketDTO>(this.API, ticketDTO);
   }

@@ -5,24 +5,26 @@
 			<a matListItemLine routerLink="/chamados" class="text-white ml-2" 
 									[class.active]="isActive('/chamados')">Chamados</a>
 
-			<mat-divider class="m-1"></mat-divider>
-			<span class="ml-2 p-2 font-bold d-inline-flex align-items-center" style="font-size: 1.2em;">Cadastros</span>
-			<mat-divider class="m-1"></mat-divider>
+			<div *ngIf="hasPermission('ADMIN')">
+				<mat-divider class="m-1"></mat-divider>
+				<span class="ml-2 p-2 font-bold d-inline-flex align-items-center" style="font-size: 1.2em;">Cadastros</span>
+				<mat-divider class="m-1"></mat-divider>
 
-			<ul class="list-unstyled">
-				<li>
-					<a matListItemLine routerLink="/chamados/topics" class="text-white ml-4"
-						[class.active]="isActive('/chamados/topics')">Tópicos</a>
-				</li>
-				<li>
-					<a matListItemLine routerLink="/chamados/categories" class="text-white ml-4"
-						[class.active]="isActive('/chamados/categories')">Categorias</a>
-				</li>
-				<li>
-					<a matListItemLine routerLink="/chamados/comments" class="text-white ml-4"
-						[class.active]="isActive('/chamados/comments')">Comentários</a>
-				</li>
-			</ul>
+				<ul class="list-unstyled">
+					<li>
+						<a matListItemLine routerLink="/chamados/topics" class="text-white ml-4"
+							[class.active]="isActive('/chamados/topics')">Tópicos</a>
+					</li>
+					<li>
+						<a matListItemLine routerLink="/chamados/categories" class="text-white ml-4"
+							[class.active]="isActive('/chamados/categories')">Categorias</a>
+					</li>
+					<li>
+						<a matListItemLine routerLink="/chamados/comments" class="text-white ml-4"
+							[class.active]="isActive('/chamados/comments')">Comentários</a>
+					</li>
+				</ul>
+			</div>
 		</mat-nav-list>
 	</mat-sidenav>
 

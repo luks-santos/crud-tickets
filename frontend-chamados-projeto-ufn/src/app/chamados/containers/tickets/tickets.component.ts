@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 
 import { TicketDialogComponent } from '../../components/ticket-dialog/ticket-dialog.component';
 import { TicketsService } from '../../service/tickets.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'app-tickets',
@@ -21,7 +22,8 @@ export class TicketsComponent {
 	constructor(
 		private dialog: MatDialog,
 		private snackBar: MatSnackBar,
-		private service: TicketsService
+		private service: TicketsService,
+		private authService: AuthService
 	) {
 		this.refresh();
 	}
@@ -33,13 +35,17 @@ export class TicketsComponent {
 	}
 
 	private refresh() {
-		this.tickets$ = this.service.findAll()
-			.pipe(
-				catchError((error) => {
-					this.onError(error)
-					return []
-				})
-			);
+		const isAdmin = this.authService.hasRole('ADMIN');
+
+		this.tickets$ = isAdmin ?
+			this.service.findAll() :
+			this.service.findByUser()
+				.pipe(
+					catchError((error) => {
+						this.onError(error);
+						return [];
+					})
+				);
 	}
 
 	private openDialog(): void {

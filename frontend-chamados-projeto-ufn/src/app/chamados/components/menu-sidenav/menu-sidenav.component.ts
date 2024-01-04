@@ -52,4 +52,8 @@ export class MenuSidenavComponent implements OnInit {
 		this.auth.removeKey(this.tokenName);
 		this.router.navigate(['/login']);
 	}
+
+	hasPermission(role: string): boolean {
+		return this.auth.hasRole(role);
+	 }
 }

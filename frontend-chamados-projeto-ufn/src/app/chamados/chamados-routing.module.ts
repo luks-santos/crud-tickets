@@ -16,9 +16,9 @@ const routes: Routes = [
     component: MenuSidenavComponent,
     children: [
       { path: '', component: TicketsComponent, data: { title: 'Chamados' } },
-      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorias' } },
-      { path: 'comments', component: CommentsComponent, data: { title: 'Comentários' } },
-      { path: 'topics', component: TopicsComponent, data: { title: 'Tópicos' } },
+      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorias', expectedRole: 'ADMIN' } },
+      { path: 'comments', component: CommentsComponent, data: { title: 'Comentários', expectedRole: 'ADMIN' } },
+      { path: 'topics', component: TopicsComponent, data: { title: 'Tópicos', expectedRole: 'ADMIN' } },
     ],
   },
 ];

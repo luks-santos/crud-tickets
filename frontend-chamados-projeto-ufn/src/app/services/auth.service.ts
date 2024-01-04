@@ -32,12 +32,32 @@ export class AuthService {
 		}
 	}
 
-	public saveKey(key: string, value: string) {
-		this.storage.setItem(key, value);
+	public saveKey(key: string, value: string, role: string) {
+		const data = { value, role }; 
+		console.log(data);
+		
+		const serializedData = JSON.stringify(data); 
+		this.storage.setItem(key, serializedData); 
 	}
 
-	public getKey(key: string): string | null {
-		return this.storage.getItem(key);
+	hasRole(expectedRole: string): boolean {
+		const token = this.getKey(this.tokenName);
+  
+		if (token) {
+		  return token && token.role === expectedRole;
+		}
+  		return false;
+	 }
+
+	public getKey(key: string) {
+		const serializedData = this.storage.getItem(key);
+  
+		if (serializedData) {
+			const data = JSON.parse(serializedData); 
+			return data;
+		}
+
+  		return null;
 	}
 	
 	public removeKey(key: string) {

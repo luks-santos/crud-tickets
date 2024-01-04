@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
 			this.authService.login(user).subscribe(
 				(data: any) => {
-					this.authService.saveKey(environment.TOKEN_NAME, data.token);
+					this.authService.saveKey(environment.TOKEN_NAME, data.token, data.role);
 					this.checkAuthentication();
 				},
 				() => {
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 		const authenticated = this.authService.isAuthenticated();
 		
 		if (authenticated) {
-			this.router.navigate(['chamados/categories']);
+			this.router.navigate(['chamados']);
 		}
 	}
 }
