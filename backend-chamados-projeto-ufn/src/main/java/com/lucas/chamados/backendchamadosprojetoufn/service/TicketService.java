@@ -49,4 +49,15 @@ public class TicketService {
                 .orElseThrow(() -> new RecordNotFoundException(id))
         );
     }
+
+    public List<TicketListDTO> findByUserLogin() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+
+        return repository.findByUser_Login(login)
+                .stream()
+                .map(mapper::toDTO)
+                .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
+                .toList();
+    }
 }

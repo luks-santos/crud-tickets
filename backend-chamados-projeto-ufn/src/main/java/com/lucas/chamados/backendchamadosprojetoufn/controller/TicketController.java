@@ -39,4 +39,8 @@ public class TicketController {
         service.delete(id);
     }
 
+    @GetMapping(value = "/user")
+    public List<TicketListDTO> findByUserLogin() {
+        return service.findByUserLogin();
+    }
 }
