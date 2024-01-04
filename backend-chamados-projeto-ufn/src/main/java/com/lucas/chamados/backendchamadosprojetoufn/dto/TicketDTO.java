@@ -1,15 +1,22 @@
 package com.lucas.chamados.backendchamadosprojetoufn.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record TicketDTO(
-        UUID id,
-        String status,
-        String priority,
-        LocalDateTime createdAt,
-        LocalDateTime closedAt,
-        UUID commentId,
-        UUID topicId,
-        String username
-) { }
+@Getter
+@Setter
+public class TicketDTO {
+    private UUID id;
+    private String status;
+    private String priority;
+    private LocalDateTime createdAt;
+    private LocalDateTime closedAt;
+    private UUID commentId;
+    private UUID topicId;
+    private String username;
+}
+
+

@@ -34,16 +34,16 @@ public class TicketMapper {
     }
 
     public Ticket toEntity(TicketDTO ticketDTO) {
-        Comment comment = commentService.findById(ticketDTO.commentId());
-        Topic topic = topicService.findById(ticketDTO.topicId());
-        User user = userService.findByLogin(ticketDTO.username());
+        Comment comment = commentService.findById(ticketDTO.getCommentId());
+        Topic topic = topicService.findById(ticketDTO.getTopicId());
+        User user = userService.findByLogin(ticketDTO.getUsername());
 
         return new Ticket(
-                ticketDTO.id(),
-                convertStatusValue(ticketDTO.status()),
-                convertPriorityValue(ticketDTO.priority()),
-                ticketDTO.createdAt(),
-                ticketDTO.closedAt(),
+                ticketDTO.getId(),
+                convertStatusValue(ticketDTO.getStatus()),
+                convertPriorityValue(ticketDTO.getPriority()),
+                ticketDTO.getCreatedAt(),
+                ticketDTO.getClosedAt(),
                 comment,
                 topic,
                 user

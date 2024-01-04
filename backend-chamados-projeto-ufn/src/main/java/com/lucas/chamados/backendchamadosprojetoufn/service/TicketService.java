@@ -8,8 +8,11 @@ import com.lucas.chamados.backendchamadosprojetoufn.repositories.TicketRepositor
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +27,7 @@ public class TicketService {
         return repository.findAll()
                 .stream()
                 .map(mapper::toDTO)
+                .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
                 .toList();
     }
 
@@ -34,6 +38,9 @@ public class TicketService {
     }
 
     public TicketListDTO save(@Valid @NotNull TicketDTO ticketDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        ticketDTO.setUsername(username);
         return mapper.toDTO(repository.save(mapper.toEntity(ticketDTO)));
     }
 
