@@ -3,8 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Observable } from 'rxjs';
 import { Ticket } from 'src/app/model/ticket/ticket';
+import { TicketDTO } from 'src/app/model/ticket/ticketDTO';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
+import { TicketDialogComponent } from '../../components/ticket-dialog/ticket-dialog.component';
 import { TicketsService } from '../../service/tickets.service';
 
 @Component({
@@ -33,19 +35,40 @@ export class TicketsComponent {
 	private refresh() {
 		this.tickets$ = this.service.findAll()
 			.pipe(
-				catchError(() => {
-					this.onError('Error ao carregar chamados.')
+				catchError((error) => {
+					this.onError(error)
 					return []
 				})
 			);
 	}
 
 	private openDialog(): void {
+		const dialogRef = this.dialog.open(TicketDialogComponent, {});
 		
+		dialogRef.afterClosed().subscribe((result) => {
+			const ticketDTO = {
+				id: null,
+				status: 'Aberto',
+				priority: result.priority,
+				createdAt: null,
+				closedAt: null,
+				commentId: result.selectComments,
+				categoryId: result.selectCategories,
+				topicId: result.selectTopics,
+				userId: null,
+			} as TicketDTO;
+
+			this.service.save(ticketDTO).subscribe(() => {
+				this.snackBar.open('Ticket created successfully', 'OK', {
+					duration: 2000
+				});
+				this.refresh();
+			});
+		});
 	}
 
 	onAdd() {
-		
+		this.openDialog();
 	}
 
 	onEdit(ticket: Ticket) {

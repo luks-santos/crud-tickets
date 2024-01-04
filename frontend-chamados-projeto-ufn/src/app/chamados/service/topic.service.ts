@@ -29,4 +29,8 @@ export class TopicService {
   delete(id: string): Observable<any> {
     return this.httpClient.delete(`${this.API}/${id}`);
   }
+
+  findTopicsByCategoryId(categoryId: number): Observable<Topic[]> {
+    return this.httpClient.get<Topic[]>(`${this.API}/category/${categoryId}`);
+  }
 }

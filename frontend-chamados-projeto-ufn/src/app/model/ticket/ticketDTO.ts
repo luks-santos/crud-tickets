@@ -1,10 +1,10 @@
 export interface TicketDTO {
-    id: string;
+    id: string | null;
     status: string;
     priority: string;
-    createdAt: Date;
-    closedAt: Date;
+    createdAt: Date | null;
+    closedAt: Date | null;
     commentId: string;
     topicId: string;
-    userId: string;
+    userId: string | null;
 }
