@@ -46,4 +46,9 @@ public class TopicController {
     public void delete(@PathVariable UUID id) {
         service.delete(id);
     }
+
+    @GetMapping(value = "/category/{categoryId}")
+    public List<Topic> findTopicsByCategoryId(@PathVariable UUID categoryId) {
+        return service.findTopicsByCategory(categoryId);
+    }
 }

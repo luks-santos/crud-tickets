@@ -27,7 +27,6 @@ public class TopicService {
     public Topic findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id));
-
     }
 
     public TopicDTO save(@Valid @NotNull TopicDTO topicDTO) {
@@ -47,6 +46,10 @@ public class TopicService {
         repository.delete(repository.findById(id)
                     .orElseThrow(() -> new RecordNotFoundException(id))
         );
+    }
+
+    public List<Topic> findTopicsByCategory(UUID categoryId) {
+        return repository.findTopicsByCategoryId(categoryId);
     }
 
     private void updateTopic(Topic entity, Topic topic) {
