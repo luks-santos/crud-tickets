@@ -39,9 +39,9 @@ public class AuthenticationController {
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO data) {
 
         if (userService.findByLogin(data.login()) != null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.unprocessableEntity().body("Login already exists");
         }
         service.register(data);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.created(null).build();
     }
 }
