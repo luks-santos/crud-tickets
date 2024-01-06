@@ -5,7 +5,7 @@ import { authGuard } from '../guards/auth.guard';
 import { MenuSidenavComponent } from './components/menu-sidenav/menu-sidenav.component';
 import { CategoriesComponent } from './containers/categories/categories.component';
 import { CommentsComponent } from './containers/comments/comments.component';
-import { TicketsComponent } from './containers/tickets/tickets.component';
+import { TicketsComponent } from './containers/ticket/tickets/tickets.component';
 import { TopicsComponent } from './containers/topics/topics.component';
 
 

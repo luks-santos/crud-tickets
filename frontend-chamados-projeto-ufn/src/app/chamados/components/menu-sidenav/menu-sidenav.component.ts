@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { UserRegisterDialogComponent } from '../../containers/user-register-dialog/user-register-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-menu-sidenav',
@@ -16,7 +19,9 @@ export class MenuSidenavComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private auth: AuthService
+		private auth: AuthService,
+		private dialog: MatDialog,
+		private snackBar: MatSnackBar,
 	) { }
 
 	ngOnInit() {
@@ -36,6 +41,17 @@ export class MenuSidenavComponent implements OnInit {
 			return this.getTitleFromRoute(state, state.firstChild(parent));
 		}
 		return null;
+	}
+
+	cadUser() {
+		const dialogRef = this.dialog.open(UserRegisterDialogComponent, {});
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.snackBar.open('Usuário criado com sucesso', 'OK', {
+					duration: 2000
+				});
+			}
+		});
 	}
 
 	isActive(route: string): boolean {

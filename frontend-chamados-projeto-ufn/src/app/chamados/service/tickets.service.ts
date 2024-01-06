@@ -14,15 +14,23 @@ export class TicketsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findAll(): Observable<Ticket[]> {
-    return this.httpClient.get<Ticket[]>(this.API);
+  findAll(status = 'Todos'): Observable<Ticket[]> {
+    const params = { status: status };
+
+    return this.httpClient.get<Ticket[]>(this.API, { params: params});
   }
 
-  findByUser() {
-    return this.httpClient.get<Ticket[]>(`${this.API}/user`);
+  findByUser(status = 'Todos'): Observable<Ticket[]> {
+    const params = { status: status };
+
+    return this.httpClient.get<Ticket[]>(`${this.API}/user`, { params: params});
   }
   
   save(ticketDTO: TicketDTO): Observable<TicketDTO> {
     return this.httpClient.post<TicketDTO>(this.API, ticketDTO);
+  }
+
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete(`${this.API}/${id}`);
   }
 }

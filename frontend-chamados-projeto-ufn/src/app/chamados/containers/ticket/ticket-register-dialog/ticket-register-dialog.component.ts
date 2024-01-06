@@ -1,23 +1,23 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CategoriesService } from 'src/app/chamados/service/categories.service';
+import { CommentService } from 'src/app/chamados/service/comments.service';
+import { TopicService } from 'src/app/chamados/service/topic.service';
 import { Category } from 'src/app/model/category';
 import { Comment } from 'src/app/model/comment';
 import { Topic } from 'src/app/model/topic/topic';
 import { InputDialogComponent } from 'src/app/shared/components/input-dialog/input-dialog.component';
 
-import { CategoriesService } from '../../service/categories.service';
-import { CommentService } from '../../service/comments.service';
-import { TopicService } from '../../service/topic.service';
 
 @Component({
-  selector: 'app-ticket-dialog',
-  templateUrl: './ticket-dialog.component.html',
-  styleUrls: ['./ticket-dialog.component.scss']
+  selector: 'app-ticket-register-dialog',
+  templateUrl: './ticket-register-dialog.component.html',
+  styleUrls: ['./ticket-register-dialog.component.scss']
 })
-export class TicketDialogComponent implements OnInit{
+export class TicketRegisterDialogComponent implements OnInit {
 
-	form!: FormGroup;
+  	form!: FormGroup;
 	comments: Comment[] = [];
 	categories: Category[] = [];
 	topics: Topic[] = [];
@@ -33,6 +33,7 @@ export class TicketDialogComponent implements OnInit{
 	
 	ngOnInit() {
 		this.form = this.fb.group({
+			description: ['', Validators.maxLength(255)],
 			selectComments: [null, Validators.required],
 			selectCategories: [null, Validators.required],
 			selectTopics: [null, Validators.required],

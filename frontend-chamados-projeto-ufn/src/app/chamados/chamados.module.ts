@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -8,14 +8,15 @@ import { ChamadosRoutingModule } from './chamados-routing.module';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { MenuSidenavComponent } from './components/menu-sidenav/menu-sidenav.component';
-import { TicketDialogComponent } from './components/ticket-dialog/ticket-dialog.component';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
 import { CategoriesComponent } from './containers/categories/categories.component';
 import { CommentsComponent } from './containers/comments/comments.component';
-import { TicketsComponent } from './containers/tickets/tickets.component';
+import { TicketsComponent } from './containers/ticket/tickets/tickets.component';
 import { TopicsComponent } from './containers/topics/topics.component';
-
+import { UserRegisterDialogComponent } from './containers/user-register-dialog/user-register-dialog.component';
+import { TicketRegisterDialogComponent } from './containers/ticket/ticket-register-dialog/ticket-register-dialog.component';
+import { TicketEditDialogComponent } from './containers/ticket/ticket-edit-dialog/ticket-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { TopicsComponent } from './containers/topics/topics.component';
     TicketListComponent,
     MenuSidenavComponent,
     TicketsComponent,
-    TicketDialogComponent
+    TicketRegisterDialogComponent,
+    UserRegisterDialogComponent,
+    TicketEditDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { TopicsComponent } from './containers/topics/topics.component';
     SharedModule,
     AppMaterialModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class ChamadosModule { }

@@ -1,6 +1,6 @@
 <mat-sidenav-container>
 	<mat-sidenav #sidenav mode="side" opened class="custom-sidenav text-white">
-		<div class="custom-sidenav-title">Olá</div>
+		<div class="custom-sidenav-title">Chamados</div>
 		<mat-nav-list>
 			<a matListItemLine routerLink="/chamados" class="text-white ml-2" 
 									[class.active]="isActive('/chamados')">Chamados</a>
@@ -43,6 +43,10 @@
 				
 				<button mat-icon-button class="btn float-end" aria-label="User">
 					<mat-icon>person</mat-icon>
+				</button>
+
+				<button *ngIf="hasPermission('ADMIN')" mat-icon-button class="btn float-end" aria-label="User add" (click)="cadUser()" >
+					<mat-icon>person_add</mat-icon>
 				</button>
 			</div>
 		</mat-toolbar>

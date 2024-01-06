@@ -1,0 +1,79 @@
+<div style="width: 600px; max-height: 700px;">
+	<h1 mat-dialog-title>Chamado</h1>
+
+	<div mat-dialog-content [formGroup]="form">
+		<mat-form-field class="col-12">
+			<mat-label>Descrição</mat-label>
+			<textarea matInput formControlName="description" placeholder="Deixe uma descrição do problema"></textarea>
+		</mat-form-field>
+
+		<div class="row">
+			<mat-form-field class="col-6">
+				<mat-label>Tipo</mat-label>
+				<mat-select formControlName="selectedComment" >
+					<mat-option [value]="form.get('selectedComment')?.value">
+						{{ form.get('selectedComment')?.value }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+	
+			<mat-form-field class="col-6">
+				<mat-label>Categoria</mat-label>
+				<mat-select formControlName="selectedCategory">
+					<mat-option [value]="form.get('selectedCategory')?.value">
+						{{ form.get('selectedCategory')?.value }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div class="row">
+			<mat-form-field class="col-6">
+				<mat-label>Assunto</mat-label>
+				<mat-select formControlName="selectedTopic">
+					<mat-option [value]="form.get('selectedTopic')?.value">
+						{{ form.get('selectedTopic')?.value }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+	
+			<mat-form-field class="col-6">
+				<mat-label>Prioridade</mat-label>
+				<mat-select formControlName="priority">
+					<mat-option [value]="form.get('priority')?.value">
+						{{ form.get('priority')?.value }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		
+		<div class="row">
+			<mat-form-field class="col-6">
+				<mat-label>Data de Criação</mat-label>
+				<input matInput formControlName="createdAt" readonly>
+			 </mat-form-field>
+			 
+			 <mat-form-field class="col-6">
+				<mat-label>Data de Fechamento</mat-label>
+				<input matInput formControlName="closedAt" readonly>
+			 </mat-form-field>
+		</div>
+
+		<mat-form-field class="col-12">
+			<mat-label>Status</mat-label>
+			<mat-select formControlName="status">
+				 <mat-option value="Pendente">Pendente</mat-option>
+				 <mat-option value="Em andamento">Em andamento</mat-option>
+				 <mat-option value="Concluido">Concluído</mat-option>
+				 <mat-option value="Cancelado">Cancelado</mat-option>
+			</mat-select>
+	  </mat-form-field>
+	</div>
+
+	<div mat-dialog-actions>
+		<div class="ms-auto p-2">
+			<button mat-button (click)="close()">Cancel</button>
+			<button mat-button color="primary" (click)="save()" cdkFocusInitial>Ok</button>
+		</div>
+	</div>
+</div>

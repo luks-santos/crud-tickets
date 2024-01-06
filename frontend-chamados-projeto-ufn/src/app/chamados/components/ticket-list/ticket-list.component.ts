@@ -12,8 +12,11 @@ export class TicketListComponent {
   @Output() add = new EventEmitter<Ticket>();
   @Output() edit = new EventEmitter<Ticket>();
   @Output() delete = new EventEmitter<Ticket>();
+  @Output() filter = new EventEmitter<string>();
 
   readonly displayedColumns = ["createdAt", "personName", "comment", "category", "topic", "status", "priority", "actions"];
+  readonly statusOptions: string[] = ['Em andamento', 'Concluído', 'Cancelado', 'Pendente'];
+  statusFilter: string = '';
 
   onAdd() {
     this.add.emit();
@@ -25,5 +28,9 @@ export class TicketListComponent {
 
   onDelete(ticket: Ticket) {
     this.delete.emit(ticket);
+  }
+  
+  aplicarFiltro() {
+    this.filter.emit(this.statusFilter);
   }
 }

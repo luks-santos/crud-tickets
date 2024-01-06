@@ -1,5 +1,5 @@
 import { Topic } from "../topic/topic";
-
+import { Comment } from "../comment";
 export interface Ticket {
    id: string;
    status: string;
@@ -10,4 +10,5 @@ export interface Ticket {
    personName: string;
    comment: Comment;
    topic: Topic;
+   description: string;
 }
