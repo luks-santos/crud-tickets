@@ -26,8 +26,8 @@ public class TicketMapper {
                 ticket.getPriority().getValue(),
                 ticket.getCreatedAt(),
                 ticket.getClosedAt(),
-                ticket.getUser().getLogin(),
                 ticket.getUser().getPerson().getName(),
+                ticket.getUser().getPerson().getCellphone(),
                 ticket.getComment(),
                 ticket.getTopic(),
                 ticket.getDescription()

@@ -12,8 +12,9 @@ public record TicketListDTO(
         String priority,
         LocalDateTime createdAt,
         LocalDateTime closedAt,
-        String username,
+        //String username,
         String personName,
+        String cellPhone,
         Comment comment,
         Topic topic,
         String description
