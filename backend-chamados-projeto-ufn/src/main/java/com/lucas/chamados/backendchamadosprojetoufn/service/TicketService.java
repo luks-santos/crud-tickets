@@ -4,6 +4,7 @@ import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.mapper.TicketMapper;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketListDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Ticket;
+import com.lucas.chamados.backendchamadosprojetoufn.enuns.Status;
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.TicketRepository;
 import jakarta.validation.constraints.NotNull;
@@ -74,5 +75,16 @@ public class TicketService {
                 .map(mapper::toDTO)
                 .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
                 .toList();
+    }
+
+    public TicketListDTO update(UUID id, TicketDTO ticketDTO) {
+        Ticket ticket = repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id));
+
+        if (ticket.getStatus() != Status.CANCELADO && ticket.getStatus() != Status.CONCLUIDO) {
+            ticket.setStatus(mapper.convertStatusValue(ticketDTO.getStatus()));
+        }
+
+        return mapper.toDTO(repository.save(ticket));
     }
 }

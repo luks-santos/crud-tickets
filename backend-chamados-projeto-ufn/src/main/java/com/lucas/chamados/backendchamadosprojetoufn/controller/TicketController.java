@@ -44,4 +44,10 @@ public class TicketController {
     public List<TicketListDTO> findByUserLogin(@RequestParam(required = false) String status) {
         return service.findByUserLoginWithStatusFilter(status);
     }
+
+    @PutMapping(value = "/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public TicketListDTO update(@PathVariable UUID id, @RequestBody TicketDTO ticketDTO) {
+        return service.update(id, ticketDTO);
+    }
 }
