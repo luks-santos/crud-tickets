@@ -10,13 +10,13 @@
 		<div class="row">
 			<mat-form-field class="col-6">
 				<mat-label>Tipo</mat-label>
-				<mat-select formControlName="selectedComment" >
+				<mat-select formControlName="selectedComment">
 					<mat-option [value]="form.get('selectedComment')?.value">
 						{{ form.get('selectedComment')?.value }}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
-	
+
 			<mat-form-field class="col-6">
 				<mat-label>Categoria</mat-label>
 				<mat-select formControlName="selectedCategory">
@@ -36,7 +36,7 @@
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
-	
+
 			<mat-form-field class="col-6">
 				<mat-label>Prioridade</mat-label>
 				<mat-select formControlName="priority">
@@ -46,34 +46,50 @@
 				</mat-select>
 			</mat-form-field>
 		</div>
-		
+
 		<div class="row">
 			<mat-form-field class="col-6">
 				<mat-label>Data de Criação</mat-label>
 				<input matInput formControlName="createdAt" readonly>
-			 </mat-form-field>
-			 
-			 <mat-form-field class="col-6">
+			</mat-form-field>
+
+			<mat-form-field class="col-6">
 				<mat-label>Data de Fechamento</mat-label>
 				<input matInput formControlName="closedAt" readonly>
-			 </mat-form-field>
+			</mat-form-field>
 		</div>
 
 		<mat-form-field class="col-12">
 			<mat-label>Status</mat-label>
 			<mat-select formControlName="status">
-				 <mat-option value="Pendente">Pendente</mat-option>
-				 <mat-option value="Em andamento">Em andamento</mat-option>
-				 <mat-option value="Concluido">Concluído</mat-option>
-				 <mat-option value="Cancelado">Cancelado</mat-option>
+				<mat-option value="Pendente">Pendente</mat-option>
+				<mat-option value="Em andamento">Em andamento</mat-option>
+				<mat-option value="Concluído">Concluído</mat-option>
+				<mat-option value="Cancelado">Cancelado</mat-option>
 			</mat-select>
-	  </mat-form-field>
+		</mat-form-field>
+
+		<div class="row">
+			<mat-form-field class="col-6">
+				<mat-label>Nome</mat-label>
+				<input matInput formControlName="name">
+			</mat-form-field>
+
+			<mat-form-field class="col-6">
+				<mat-label>Telefone</mat-label>
+				<input matInput formControlName="cellphone">
+			</mat-form-field>
+		</div>
 	</div>
 
 	<div mat-dialog-actions>
 		<div class="ms-auto p-2">
 			<button mat-button (click)="close()">Cancel</button>
-			<button mat-button color="primary" (click)="save()" cdkFocusInitial>Ok</button>
+			<button mat-button [disabled]="data.status === 'Cancelado' || 
+													 data.status === 'Concluído' ||
+													 authService.hasRole('USER')" 
+													 color="primary" (click)="save()" 
+													 cdkFocusInitial>Ok</button>
 		</div>
 	</div>
 </div>

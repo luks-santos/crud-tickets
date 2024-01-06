@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Ticket } from 'src/app/model/ticket/ticket';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-ticket-list',
@@ -18,18 +19,22 @@ export class TicketListComponent {
   readonly statusOptions: string[] = ['Em andamento', 'Concluído', 'Cancelado', 'Pendente'];
   statusFilter: string = '';
 
+  constructor(
+    public authService: AuthService
+  ) { }
+
   onAdd() {
     this.add.emit();
   }
 
-  onEdit(ticket: Ticket) {    
+  onEdit(ticket: Ticket) {
     this.edit.emit(ticket);
   }
 
   onDelete(ticket: Ticket) {
     this.delete.emit(ticket);
   }
-  
+
   aplicarFiltro() {
     this.filter.emit(this.statusFilter);
   }

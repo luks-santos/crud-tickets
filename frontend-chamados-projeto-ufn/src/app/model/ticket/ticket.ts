@@ -8,6 +8,7 @@ export interface Ticket {
    closedAt: Date;
    username: string;
    personName: string;
+   cellPhone: string;
    comment: Comment;
    topic: Topic;
    description: string;

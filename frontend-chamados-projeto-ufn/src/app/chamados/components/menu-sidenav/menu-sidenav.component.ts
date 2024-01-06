@@ -1,35 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+
 import { UserRegisterDialogComponent } from '../../containers/user-register-dialog/user-register-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-menu-sidenav',
-  templateUrl: './menu-sidenav.component.html',
-  styleUrls: ['./menu-sidenav.component.scss']
+	selector: 'app-menu-sidenav',
+	templateUrl: './menu-sidenav.component.html',
+	styleUrls: ['./menu-sidenav.component.scss']
 })
 export class MenuSidenavComponent implements OnInit {
 
 	private tokenName = environment.TOKEN_NAME;
-  	title = 'App Chamados';
+	title = 'Chamados';
+	greetingMessage = '';
 
 	constructor(
 		private router: Router,
 		private auth: AuthService,
 		private dialog: MatDialog,
 		private snackBar: MatSnackBar,
-	) { }
+	) { 
+		this.updateGreetingMessage();
+	}
 
 	ngOnInit() {
 		this.router.events.pipe(filter(event => event instanceof NavigationEnd))
 			.subscribe(() => {
 				const routeTitle = this.getTitleFromRoute(this.router.routerState, this.router.routerState.root);
-				this.title = routeTitle ?? 'App Chamados';
-		});
+				if (routeTitle !== 'Chamados') {
+					this.title = 'Chamados -> ' + routeTitle;
+				}
+				else {
+					this.title = routeTitle ?? '~';
+				}
+			});
 	}
 
 	private getTitleFromRoute(state: any, parent: any): string | null {
@@ -71,5 +80,21 @@ export class MenuSidenavComponent implements OnInit {
 
 	hasPermission(role: string): boolean {
 		return this.auth.hasRole(role);
-	 }
+	}
+
+	private getTimeOfDay(): string {
+		const currentHour = new Date().getHours();
+  
+		if (currentHour >= 5 && currentHour < 12) {
+		  return `Bom dia`;
+		} else if (currentHour >= 12 && currentHour < 18) {
+		  return 'Boa tarde';
+		} else {
+		  return 'Boa noite';
+		}
+	}
+
+	private updateGreetingMessage(): void {
+		this.greetingMessage = this.getTimeOfDay();
+	}
 }

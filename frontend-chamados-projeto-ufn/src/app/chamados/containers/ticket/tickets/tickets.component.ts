@@ -85,6 +85,8 @@ export class TicketsComponent {
 	}
 
 	onEdit(ticket: Ticket) {
+		console.log(ticket);
+		
 		const data = {
 			description: ticket.description,
 			selectedComment: ticket.comment.name,
@@ -94,6 +96,8 @@ export class TicketsComponent {
 			priority: ticket.priority,
 			createdAt: ticket.createdAt,
 			closedAt: ticket.closedAt,
+			name: ticket.personName,
+			cellPhone: ticket.cellPhone,
 		}
 		
 		const dialogRef = this.dialog.open(TicketEditDialogComponent, {
@@ -101,24 +105,26 @@ export class TicketsComponent {
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {
-			ticket.status = result.status;
-			const ticketDTO = {
-				id: ticket.id,
-				status: ticket.status,
-				priority: ticket.priority,
-				createdAt: ticket.createdAt,
-				closedAt: ticket.closedAt,
-				commentId: ticket.comment.id,
-				categoryId: ticket.topic.category.id,
-				topicId: ticket.topic.id
-			} as TicketDTO;
+			if (result) {
+				ticket.status = result.status;
+				const ticketDTO = {
+					id: ticket.id,
+					status: ticket.status,
+					priority: ticket.priority,
+					createdAt: ticket.createdAt,
+					closedAt: ticket.closedAt,
+					commentId: ticket.comment.id,
+					categoryId: ticket.topic.category.id,
+					topicId: ticket.topic.id
+				} as TicketDTO;
 
-			this.service.save(ticketDTO).subscribe(() => {
-				this.snackBar.open('Chamado atualizado com sucesso', 'OK', {
-					duration: 2000
-				});
-				this.refresh();
-			});		
+				this.service.edit(ticketDTO).subscribe(() => {
+					this.snackBar.open('Chamado atualizado com sucesso', 'OK', {
+						duration: 2000
+					});
+					this.refresh();
+				});	
+			}	
 		});
 	}
 

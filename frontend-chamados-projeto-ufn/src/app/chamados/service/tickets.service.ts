@@ -33,4 +33,8 @@ export class TicketsService {
   delete(id: string): Observable<any> {
     return this.httpClient.delete(`${this.API}/${id}`);
   }
+
+  edit(ticketDTO: TicketDTO): Observable<TicketDTO> {
+    return this.httpClient.put<TicketDTO>(`${this.API}/${ticketDTO.id}`, ticketDTO);
+  }
 }

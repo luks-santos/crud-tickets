@@ -13,4 +13,8 @@ export class UserService {
   create(user: any) {
     return this.httpClient.post(this.API + '/register', user);
   }
+
+  personName() {
+    return this.httpClient.get(this.API + '/name');
+  }
 }
