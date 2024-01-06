@@ -10,6 +10,7 @@ import java.util.UUID;
 @Setter
 public class TicketDTO {
     private UUID id;
+    private String description;
     private String status;
     private String priority;
     private LocalDateTime createdAt;

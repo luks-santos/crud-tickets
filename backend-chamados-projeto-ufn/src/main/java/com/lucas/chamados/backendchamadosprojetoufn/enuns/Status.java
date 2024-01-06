@@ -6,9 +6,10 @@ import lombok.Getter;
 @Getter
 public enum Status {
 
-    ABERTO("Aberto"),
+    PENDENTE("Pendente"),
     EM_ANDAMENTO("Em andamento"),
-    FECHADO("Fechado");
+    CONCLUIDO("Concluído"),
+    CANCELADO("Cancelado");
 
     private final String value;
     Status (String value) {

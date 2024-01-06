@@ -18,8 +18,9 @@ public class TicketController {
     private final TicketService service;
 
     @GetMapping
-    public List<TicketListDTO> findAll() {
-        return service.findAll();
+    public List<TicketListDTO> findAll(@RequestParam(required = false) String status
+    ) {
+        return service.findAllWithStatusFilter(status);
     }
 
     @GetMapping(value = "/{id}")
@@ -40,7 +41,7 @@ public class TicketController {
     }
 
     @GetMapping(value = "/user")
-    public List<TicketListDTO> findByUserLogin() {
-        return service.findByUserLogin();
+    public List<TicketListDTO> findByUserLogin(@RequestParam(required = false) String status) {
+        return service.findByUserLoginWithStatusFilter(status);
     }
 }

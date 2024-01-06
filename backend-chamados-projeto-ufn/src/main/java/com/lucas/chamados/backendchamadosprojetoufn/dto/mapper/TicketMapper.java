@@ -29,7 +29,8 @@ public class TicketMapper {
                 ticket.getUser().getLogin(),
                 ticket.getUser().getPerson().getName(),
                 ticket.getComment(),
-                ticket.getTopic()
+                ticket.getTopic(),
+                ticket.getDescription()
         );
     }
 
@@ -40,6 +41,7 @@ public class TicketMapper {
 
         return new Ticket(
                 ticketDTO.getId(),
+                ticketDTO.getDescription(),
                 convertStatusValue(ticketDTO.getStatus()),
                 convertPriorityValue(ticketDTO.getPriority()),
                 ticketDTO.getCreatedAt(),
@@ -55,12 +57,14 @@ public class TicketMapper {
             return null;
         }
         return switch (value) {
-            case "Aberto" -> Status.ABERTO;
+            case "Pendente" -> Status.PENDENTE;
             case "Em andamento" -> Status.EM_ANDAMENTO;
-            case "Fechado" -> Status.FECHADO;
+            case "Concluído" -> Status.CONCLUIDO;
+            case "Cancelado" -> Status.CANCELADO;
             default -> throw new IllegalArgumentException("Status inválido: " + value);
         };
     }
+
     public Priority convertPriorityValue(String value) {
         if (value == null) {
             return null;
@@ -72,5 +76,4 @@ public class TicketMapper {
             default -> throw new IllegalArgumentException("Prioridade inválida: " + value);
         };
     }
-
 }

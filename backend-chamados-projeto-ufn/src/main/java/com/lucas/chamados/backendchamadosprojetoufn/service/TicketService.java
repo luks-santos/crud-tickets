@@ -3,9 +3,9 @@ package com.lucas.chamados.backendchamadosprojetoufn.service;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.mapper.TicketMapper;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TicketListDTO;
+import com.lucas.chamados.backendchamadosprojetoufn.entities.Ticket;
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
 import com.lucas.chamados.backendchamadosprojetoufn.repositories.TicketRepository;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -23,9 +23,17 @@ public class TicketService {
     private final TicketRepository repository;
     private final TicketMapper mapper;
 
-    public List<TicketListDTO> findAll() {
-        return repository.findAll()
-                .stream()
+
+    public List<TicketListDTO> findAllWithStatusFilter(String status) {
+        List<Ticket> filteredTickets;
+
+        if (!status.equals("Todos")) {
+            filteredTickets = repository.findByStatus(mapper.convertStatusValue(status));
+        } else {
+            filteredTickets = repository.findAll();
+        }
+
+        return filteredTickets.stream()
                 .map(mapper::toDTO)
                 .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
                 .toList();
@@ -37,7 +45,7 @@ public class TicketService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public TicketListDTO save(@Valid @NotNull TicketDTO ticketDTO) {
+    public TicketListDTO save(@NotNull TicketDTO ticketDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         ticketDTO.setUsername(username);
@@ -50,12 +58,19 @@ public class TicketService {
         );
     }
 
-    public List<TicketListDTO> findByUserLogin() {
+    public List<TicketListDTO> findByUserLoginWithStatusFilter(String status) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
 
-        return repository.findByUser_Login(login)
-                .stream()
+        List<Ticket> filteredTickets;
+
+        if (!status.equals("Todos")) {
+            filteredTickets = repository.findByUser_LoginAndStatus(login, mapper.convertStatusValue(status));
+        } else {
+            filteredTickets = repository.findByUser_Login(login);
+        }
+
+        return filteredTickets.stream()
                 .map(mapper::toDTO)
                 .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
                 .toList();

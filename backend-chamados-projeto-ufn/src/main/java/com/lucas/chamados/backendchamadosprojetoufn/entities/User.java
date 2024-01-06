@@ -42,6 +42,9 @@ public class User implements UserDetails {
     @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
+    /*
+    * Pode ser removido
+    */
     @OneToMany(mappedBy = "user")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Ticket> tickets = new ArrayList<>();

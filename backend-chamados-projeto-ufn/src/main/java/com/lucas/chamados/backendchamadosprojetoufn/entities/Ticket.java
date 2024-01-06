@@ -26,6 +26,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    private String description;
+
     @NotNull
     @Convert(converter = StatusConverter.class)
     private Status status;

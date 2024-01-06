@@ -15,5 +15,6 @@ public record TicketListDTO(
         String username,
         String personName,
         Comment comment,
-        Topic topic
+        Topic topic,
+        String description
 ) { }
