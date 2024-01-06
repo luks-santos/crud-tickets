@@ -31,6 +31,8 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/tickets").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/tickets").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
 
