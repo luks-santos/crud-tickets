@@ -28,7 +28,7 @@ Sistrma para gerenciamento e acompanhamento de solicitação de chamados
 
 ## Funcionalidades Principais
 ### Admin
-    - CRUD de vhamados
+    - CRUD de chamados
     - CRUD de assunto, categoria e comentário
     - CRUD de usuário
 ### Usuário
