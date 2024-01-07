@@ -1,6 +1,6 @@
 # Rápido Chamados
 
-Sistrma para gerenciamento e acompanhamento de solicitação de chamados
+Sistema para gerenciamento e acompanhamento de solicitação de chamados
 
 ## Tecnologias Utilizadas
 ### Backend
