@@ -10,7 +10,7 @@ Sistrma para gerenciamento e acompanhamento de solicitação de chamados
 - JWT (JSON Web Tokens)
 - JPA (Java Persistence API)
 - Angular (com Angular Material)
-- BootStrap
+- Bootstrap
 
 ## Pré-requisitos
 
