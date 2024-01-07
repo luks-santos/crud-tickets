@@ -3,72 +3,36 @@
 Sistrma para gerenciamento e acompanhamento de solicitação de chamados
 
 ## Tecnologias Utilizadas
+### Backend
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-- Java 17
-- Angular 16
-- Spring Boot
-- JWT (JSON Web Tokens)
-- JPA (Java Persistence API)
-- Angular (com Angular Material)
-- Bootstrap
+
+### Frontend
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![Angular Material](https://img.shields.io/badge/material%20design-757575?style=for-the-badge&logo=material%20design&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## Pré-requisitos
 
 - Java 17
 - Maven
-- Node.js e npm (para o frontend Angular)
-
-## Configuração do Backend
-
-1. Clone o repositório:
-
-    ```bash
-    git clone git@github.com:luks-santos/chamados-projeto-ufn.git
-    ```
-
-2. Navegue até o diretório do backend:
-
-    ```bash
-    cd ./backend-chamados-projeto-ufn
-    ```
-
-3. Configure as propriedades do banco de dados em `src/main/resources/application.properties`.
-
-4. Execute o aplicativo Spring Boot:
-
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-
-## Configuração do Frontend
-
-1. Navegue até o diretório do frontend:
-
-    ```bash
-    cd ./frontend-chamados-projeto-ufn
-    ```
-
-2. Instale as dependências:
-
-    ```bash
-    npm install
-    ```
-
-3. Configure a URL da API no arquivo `proxy.conf.js`.
-
-4. Execute o aplicativo Angular:
-
-    ```bash
-    npm run start
-    ```
-
-5. Abra o navegador e vá para `http://localhost:4200/` para acessar a aplicação.
+- Angular 16
+- Node.js e npm compátiveis com a versão do Angular 
 
 ## Funcionalidades Principais
-
-- CRUD de Chamados
-- CRUD de Assunto, Categoria e Comentário
-- CRUD de Usuário
+### Admin
+    - CRUD de vhamados
+    - CRUD de assunto, categoria e comentário
+    - CRUD de usuário
+### Usuário
+    - Cadastro e visualização dos chamados
 
 ## Estrutura do Banco de dados
 
@@ -85,7 +49,10 @@ Sistrma para gerenciamento e acompanhamento de solicitação de chamados
 ![Acompanhamento Chamados](./imgs/visua-chamados.png)
 *Acompanhamento de Chamados*
 
+## Contribuidores 
+- Professores: Luan Vieira e Gabriel Flores - UFN
+- Colegas: Osvaldo Ribeiro e Luzielma - UFN
+  
 ## Contato
-
 - [LinkedIn](https://www.linkedin.com/in/lucas-bt/)
 
