@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TicketMapper {
 
-    private final CommentService commentService;
-    private final TopicService topicService;
-    private final UserService userService;
+    private CommentService commentService;
+    private TopicService topicService;
+    private UserService userService;
 
     public TicketListDTO toDTO(Ticket ticket) {
         return new TicketListDTO(

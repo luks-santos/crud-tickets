@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TopicMapper {
 
-    private final CategoryService categoryService;
+    private CategoryService categoryService;
 
     public TopicDTO toDTO(Topic topic) {
         return new TopicDTO(topic.getId(), topic.getName(), topic.getCategory().getId());
