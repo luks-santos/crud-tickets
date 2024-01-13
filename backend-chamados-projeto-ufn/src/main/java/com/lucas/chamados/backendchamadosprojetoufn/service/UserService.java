@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private UserRepository repository;
 
     public User save(@Valid @NotNull User user) {
         return repository.save(user);

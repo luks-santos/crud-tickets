@@ -4,21 +4,19 @@ package com.lucas.chamados.backendchamadosprojetoufn.controller;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TopicDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Topic;
 import com.lucas.chamados.backendchamadosprojetoufn.service.TopicService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/topics")
 public class TopicController {
 
-    private final TopicService service;
-
-    public TopicController(TopicService topicService) {
-        service = topicService;
-    }
+    private  TopicService service;
 
     @GetMapping
     public List<Topic> findAll() {

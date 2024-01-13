@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 public class CommentService {
 
-    private final CommentRepository repository;
+    private CommentRepository repository;
 
     public List<Comment> findAll() {
         return repository.findAll();

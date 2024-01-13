@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequestMapping(value = "/api/comments")
 public class CommentController {
 
-    private final CommentService service;
+    private CommentService service;
 
     @GetMapping
     public List<Comment> findAll() {

@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 
-    private final AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
-    private final UserService userService;
-    private final AuthenticationService service;
+    private AuthenticationManager authenticationManager;
+    private TokenService tokenService;
+    private UserService userService;
+    private AuthenticationService service;
 
     @PostMapping(value = "/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {

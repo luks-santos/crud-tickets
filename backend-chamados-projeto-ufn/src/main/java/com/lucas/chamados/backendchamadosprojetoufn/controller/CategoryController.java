@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
-    private final CategoryService service;
+    private CategoryService service;
 
     @GetMapping
     public List<Category> findAll() {

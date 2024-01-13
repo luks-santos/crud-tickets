@@ -21,14 +21,14 @@ import java.util.UUID;
 @Service
 public class TicketService {
 
-    private final TicketRepository repository;
-    private final TicketMapper mapper;
+    private TicketRepository repository;
+    private TicketMapper mapper;
 
 
     public List<TicketListDTO> findAllWithStatusFilter(String status) {
         List<Ticket> filteredTickets;
 
-        if (!status.equals("Todos")) {
+        if (status != null && !status.equals("Todos")) {
             filteredTickets = repository.findByStatus(mapper.convertStatusValue(status));
         } else {
             filteredTickets = repository.findAll();

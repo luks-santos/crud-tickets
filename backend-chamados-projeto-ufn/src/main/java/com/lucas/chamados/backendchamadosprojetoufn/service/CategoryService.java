@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 public class CategoryService {
 
-    private final CategoryRepository repository;
+    private CategoryRepository repository;
 
     public List<Category> findAll() {
         return repository.findAll();

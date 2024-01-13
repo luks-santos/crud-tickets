@@ -17,8 +17,8 @@ import java.util.UUID;
 @Service
 public class TopicService {
 
-    private final TopicRepository repository;
-    private final TopicMapper mapper;
+    private TopicRepository repository;
+    private TopicMapper mapper;
 
     public List<Topic> findAll() {
         return repository.findAll();

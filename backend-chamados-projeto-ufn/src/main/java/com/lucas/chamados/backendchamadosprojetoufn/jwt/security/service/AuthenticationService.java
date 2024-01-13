@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationService {
 
-    private final UserService userService;
+    private UserService userService;
 
     public void register(RegisterDTO data) {
 

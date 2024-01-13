@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequestMapping("/api/tickets")
 public class TicketController {
 
-    private final TicketService service;
+    private TicketService service;
 
     @GetMapping
     public List<TicketListDTO> findAll(@RequestParam(required = false) String status
