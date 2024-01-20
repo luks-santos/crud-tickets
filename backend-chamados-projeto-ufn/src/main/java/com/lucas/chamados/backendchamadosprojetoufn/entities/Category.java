@@ -1,15 +1,12 @@
 package com.lucas.chamados.backendchamadosprojetoufn.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -21,13 +18,14 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank
-    @NotNull
-    @Length(max = 200)
+    @NotBlank(message = "name is mandatory")
+    @Size(max = 200)
     @Column(nullable = false, length = 200)
     private String name;
 
+    /* Posso remover essa lista não é utilizada
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "category")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Topic> topics = new ArrayList<>();
+    */
 }

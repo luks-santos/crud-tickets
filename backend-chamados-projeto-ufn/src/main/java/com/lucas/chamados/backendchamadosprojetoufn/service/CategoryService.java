@@ -26,15 +26,15 @@ public class CategoryService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public Category save(@Valid @NotNull Category category) {
+    public Category save(Category category) {
         return repository.save(category);
     }
 
-    public Category update(UUID id, @Valid @NotNull Category category) {
+    public Category update(UUID id, Category category) {
         return repository.findById(id)
-                .map(record -> {
-                    record.setName(category.getName());
-                    return repository.save(record);
+                .map(entity -> {
+                    entity.setName(category.getName());
+                    return repository.save(entity);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
