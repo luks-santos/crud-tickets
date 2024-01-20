@@ -2,12 +2,15 @@ package com.lucas.chamados.backendchamadosprojetoufn.controller.advices;
 
 
 import com.lucas.chamados.backendchamadosprojetoufn.exception.RecordNotFoundException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
@@ -33,7 +36,28 @@ public class ApplicationControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         return ex.getBindingResult().getFieldErrors().stream()
-                .map(exception -> exception.getField() + " " + exception.getDefaultMessage())
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .reduce("", (acc, error) -> acc + error + "\n");
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
+        return extractErrorMessage(ex);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ex.getMessage();
+    }
+
+    private String extractErrorMessage(SQLIntegrityConstraintViolationException ex) {
+        String errorMessage = ex.getMessage();
+
+        if (errorMessage.contains("FOREIGN KEY")) {
+            errorMessage = "Cannot delete or update a parent row: a foreign key constraint fails.";
+        }
+        return errorMessage;
     }
 }

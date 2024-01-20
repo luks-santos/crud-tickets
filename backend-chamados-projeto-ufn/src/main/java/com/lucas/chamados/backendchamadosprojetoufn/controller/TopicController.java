@@ -4,6 +4,7 @@ package com.lucas.chamados.backendchamadosprojetoufn.controller;
 import com.lucas.chamados.backendchamadosprojetoufn.dto.TopicDTO;
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Topic;
 import com.lucas.chamados.backendchamadosprojetoufn.service.TopicService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @RequestMapping("/api/topics")
 public class TopicController {
 
-    private  TopicService service;
+    private TopicService service;
 
     @GetMapping
     public List<Topic> findAll() {
@@ -28,14 +29,19 @@ public class TopicController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/category/{categoryId}")
+    public List<Topic> findTopicsByCategoryId(@PathVariable UUID categoryId) {
+        return service.findTopicsByCategory(categoryId);
+    }
+
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public TopicDTO save(@RequestBody TopicDTO topic) {
+    public TopicDTO save(@RequestBody @Valid TopicDTO topic) {
         return service.save(topic);
     }
 
     @PutMapping(value = "/{id}")
-    public TopicDTO update(@PathVariable UUID id, @RequestBody TopicDTO topic) {
+    public TopicDTO update(@PathVariable UUID id, @RequestBody @Valid TopicDTO topic) {
         return service.update(id, topic);
     }
 
@@ -43,10 +49,5 @@ public class TopicController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
         service.delete(id);
-    }
-
-    @GetMapping(value = "/category/{categoryId}")
-    public List<Topic> findTopicsByCategoryId(@PathVariable UUID categoryId) {
-        return service.findTopicsByCategory(categoryId);
     }
 }

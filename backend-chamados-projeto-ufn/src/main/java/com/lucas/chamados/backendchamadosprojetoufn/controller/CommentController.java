@@ -2,6 +2,7 @@ package com.lucas.chamados.backendchamadosprojetoufn.controller;
 
 import com.lucas.chamados.backendchamadosprojetoufn.entities.Comment;
 import com.lucas.chamados.backendchamadosprojetoufn.service.CommentService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +29,12 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Comment save(@RequestBody Comment comment) {
+    public Comment save(@RequestBody @Valid Comment comment) {
         return service.save(comment);
     }
 
     @PutMapping(value = "/{id}")
-    public Comment update(@PathVariable UUID id, @RequestBody Comment comment) {
+    public Comment update(@PathVariable UUID id, @RequestBody @Valid Comment comment) {
         return service.update(id, comment);
     }
 

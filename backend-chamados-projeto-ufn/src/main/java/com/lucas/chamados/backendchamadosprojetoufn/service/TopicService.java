@@ -24,16 +24,20 @@ public class TopicService {
         return repository.findAll();
     }
 
+    public List<Topic> findTopicsByCategory(UUID categoryId) {
+        return repository.findTopicsByCategoryId(categoryId);
+    }
+
     public Topic findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public TopicDTO save(@Valid @NotNull TopicDTO topicDTO) {
+    public TopicDTO save(TopicDTO topicDTO) {
         return mapper.toDTO(this.repository.save(mapper.toEntity(topicDTO)));
     }
 
-    public TopicDTO update(UUID id, @Valid @NotNull TopicDTO topicDTO) {
+    public TopicDTO update(UUID id, TopicDTO topicDTO) {
         return repository.findById(id)
                 .map(entity -> {
                     updateTopic(entity, mapper.toEntity(topicDTO));
@@ -46,10 +50,6 @@ public class TopicService {
         repository.delete(repository.findById(id)
                     .orElseThrow(() -> new RecordNotFoundException(id))
         );
-    }
-
-    public List<Topic> findTopicsByCategory(UUID categoryId) {
-        return repository.findTopicsByCategoryId(categoryId);
     }
 
     private void updateTopic(Topic entity, Topic topic) {

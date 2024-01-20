@@ -61,7 +61,7 @@ public class TicketMapper {
             case "Em andamento" -> Status.EM_ANDAMENTO;
             case "Concluído" -> Status.CONCLUIDO;
             case "Cancelado" -> Status.CANCELADO;
-            default -> throw new IllegalArgumentException("Status inválido: " + value);
+            default -> throw new IllegalArgumentException("Invalid status: " + value);
         };
     }
 
@@ -73,7 +73,7 @@ public class TicketMapper {
             case "Baixa" -> Priority.BAIXA;
             case "Média" -> Priority.MEDIA;
             case "Alta" -> Priority.ALTA;
-            default -> throw new IllegalArgumentException("Prioridade inválida: " + value);
+            default -> throw new IllegalArgumentException("Invalid priority: " + value);
         };
     }
 }

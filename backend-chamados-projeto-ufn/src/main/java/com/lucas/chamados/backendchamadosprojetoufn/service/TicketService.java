@@ -28,10 +28,28 @@ public class TicketService {
     public List<TicketListDTO> findAllWithStatusFilter(String status) {
         List<Ticket> filteredTickets;
 
-        if (status != null && !status.equals("Todos")) {
+        if (status != null && !status.isBlank() && !status.equals("Todos")) {
             filteredTickets = repository.findByStatus(mapper.convertStatusValue(status));
         } else {
             filteredTickets = repository.findAll();
+        }
+
+        return filteredTickets.stream()
+                .map(mapper::toDTO)
+                .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
+                .toList();
+    }
+
+    public List<TicketListDTO> findByUserLoginWithStatusFilter(String status) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+
+        List<Ticket> filteredTickets;
+
+        if (status != null && !status.isBlank() && !status.equals("Todos")) {
+            filteredTickets = repository.findByUser_LoginAndStatus(login, mapper.convertStatusValue(status));
+        } else {
+            filteredTickets = repository.findByUser_Login(login);
         }
 
         return filteredTickets.stream()
@@ -46,35 +64,11 @@ public class TicketService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public TicketListDTO save(@NotNull TicketDTO ticketDTO) {
+    public TicketListDTO save(TicketDTO ticketDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         ticketDTO.setUsername(username);
         return mapper.toDTO(repository.save(mapper.toEntity(ticketDTO)));
-    }
-
-    public void delete(UUID id) {
-        repository.delete(repository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException(id))
-        );
-    }
-
-    public List<TicketListDTO> findByUserLoginWithStatusFilter(String status) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String login = authentication.getName();
-
-        List<Ticket> filteredTickets;
-
-        if (!status.equals("Todos")) {
-            filteredTickets = repository.findByUser_LoginAndStatus(login, mapper.convertStatusValue(status));
-        } else {
-            filteredTickets = repository.findByUser_Login(login);
-        }
-
-        return filteredTickets.stream()
-                .map(mapper::toDTO)
-                .sorted(Comparator.comparing(TicketListDTO::createdAt).reversed())
-                .toList();
     }
 
     public TicketListDTO update(UUID id, TicketDTO ticketDTO) {
@@ -86,5 +80,11 @@ public class TicketService {
         }
 
         return mapper.toDTO(repository.save(ticket));
+    }
+
+    public void delete(UUID id) {
+        repository.delete(repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id))
+        );
     }
 }

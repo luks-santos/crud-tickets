@@ -12,6 +12,7 @@ public enum Status {
     CANCELADO("Cancelado");
 
     private final String value;
+
     Status (String value) {
         this.value = value;
     }
