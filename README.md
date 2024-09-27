@@ -1,4 +1,4 @@
-# Rápido Chamados
+# API Chamados
 
 Sistema para gerenciamento e acompanhamento de solicitação de chamados
 
